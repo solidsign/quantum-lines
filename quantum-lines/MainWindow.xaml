@@ -4,14 +4,27 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:quantum_lines"
+        xmlns:dd="urn:gong-wpf-dragdrop"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Canvas x:Name="CanvasMain" Width="800" Margin="0,0,0,6">
 
-        <Button Width="800" Height="418" Background="LightBlue" MouseMove="TrackingCoord" Canvas.Left="-2"/>
+        <ListBox x:Name="operationsList" SelectionChanged="operationsList_SelectionChanged"
+         dd:DragDrop.IsDragSource="True"
+         dd:DragDrop.IsDropTarget="True">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel>
+                        <Image Width="100" Height="75" Source="Binding Path=ImagePath" />
+                        <TextBlock FontSize="16" Text="{Binding Path=Title}" HorizontalAlignment="Center" />
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+            <Button Width="460" Height="251" Background="LightBlue" MouseMove="TrackingCoord" Canvas.Left="230" Canvas.Top="25"/>
         <Label Width ="800" Height="30" Name="lblCoordinateInfo" Grid.Row="1" MinHeight="20" FontSize="14" Canvas.Top="388"/>
 
-        <Image Width="783" Height="40" Canvas.Top="96" Source="/Безымянный.png" Canvas.Left="7" MouseMove="InsertingSquares" />
+        <Image Width="465" Height="40" Canvas.Top="96" Source="/Безымянный.png" Canvas.Left="225" MouseMove="InsertingSquares" />
         <Thumb Canvas.ZIndex="99"  DragDelta="Thumb_DragDelta" Height="110" Width="284" Canvas.Left="230" Canvas.Top="185">
             <Thumb.Template>
                 <ControlTemplate>

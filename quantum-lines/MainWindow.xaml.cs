@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,10 +21,35 @@ namespace quantum_lines
     /// </summary>
     public partial class MainWindow : Window
     {
+        public ObservableCollection<Operation> Operations { get; set; }
         public MainWindow()
         {
             InitializeComponent();
+
+            Operations = new ObservableCollection<Operation>
+        {
+            new Operation {Id=1, ImagePath="/Images/iphone6s.jpg", Title="Operator" },
+            new Operation {Id=2, ImagePath="/Images/lumia950.jpg", Title="OperatorFactory" },
+            new Operation {Id=3, ImagePath="/Images/nexus5x.jpg", Title="OperatorsHolder" },
+        };
+            operationsList.ItemsSource = Operations;
+
         }
+
+        public class Operation
+        {
+            public int Id { get; set; }
+            public string Title { get; set; } // модель телефона
+            public string ImagePath { get; set; } // путь к изображению
+        }
+
+        private void operationsList_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            Operation p = (Operation)operationsList.SelectedItem;
+            MessageBox.Show(p.Title);
+        }
+
+
 
         private void Thumb_DragDelta(object sender, System.Windows.Controls.Primitives.DragDeltaEventArgs e)
         {
