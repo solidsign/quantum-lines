@@ -24,5 +24,29 @@ namespace quantum_lines
         {
             InitializeComponent();
         }
+
+        private void Thumb_DragDelta(object sender, System.Windows.Controls.Primitives.DragDeltaEventArgs e)
+        {
+            UIElement thumb = e.Source as UIElement;
+
+            Canvas.SetLeft(thumb, Canvas.GetLeft(thumb) + e.HorizontalChange);
+            Canvas.SetTop(thumb, Canvas.GetTop(thumb) + e.VerticalChange);
+            // Point currentMousePosition = Mouse.GetPosition(Application.Current.MainWindow);     //получает координаты клика по холсту
+            double left = Canvas.GetLeft((UIElement)sender);
+            double top = Canvas.GetTop((UIElement)sender);
+
+        }
+
+        private void InsertingSquares(object sender, MouseEventArgs e)
+        {
+
+        }
+
+        private void TrackingCoord(object sender, MouseEventArgs e)
+        {
+            Point pt = e.GetPosition(this);
+            lblCoordinateInfo.Content = String.Format("X: {0}, Y: {1}", pt.X, pt.Y);
+        }
+
     }
 }
