@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using quantum_lines.Program;
 
 namespace quantum_lines
 {
@@ -20,9 +21,11 @@ namespace quantum_lines
     /// </summary>
     public partial class MainWindow : Window
     {
+        private ProgramView _programView;
         public MainWindow()
         {
             InitializeComponent();
+            _programView = new ProgramView(); // <- от сюда по сути и идет инициализация всей приложухи
         }
     }
 }
