@@ -18,5 +18,7 @@ namespace quantum_lines.Program
             _scheme = new SchemeView(/*возможно сюда надо будет прокидывать этот конфиг*/);
             _operatorsMenu = new OperatorsMenuView();
         }
+
+
     }
 }

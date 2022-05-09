@@ -28,8 +28,14 @@ namespace quantum_lines
         public MainWindow()
         {
             InitializeComponent();
+            var buttons = new List<Button>();
+            buttons.Add(notMenuButton);
+            buttons.Add(hadamardMenuButton);
             _programView = new ProgramView(); // <- от сюда по сути и идет инициализация всей приложухи
+            
         }
 
+
+        
     }
 }

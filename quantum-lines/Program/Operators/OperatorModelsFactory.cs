@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace quantum_lines.Program.Operators
 {
-    public class OperatorModelsFactory
+    public static class OperatorModelsFactory
     {
-        public OperatorModel Create(OperatorId operatorId)
+        public static OperatorModel Create(OperatorId operatorId)
         {
             switch (operatorId)
             {

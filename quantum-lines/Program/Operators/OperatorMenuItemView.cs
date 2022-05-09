@@ -8,5 +8,10 @@ namespace quantum_lines.Program.Operators
 {
     public class OperatorMenuItemView
     {
+        private OperatorMenuItemViewModel _viewModel;
+        public OperatorMenuItemView(OperatorId id)
+        {
+            _viewModel = new OperatorMenuItemViewModel(id);
+        }
     }
 }
