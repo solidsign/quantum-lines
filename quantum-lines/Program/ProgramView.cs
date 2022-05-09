@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 
 namespace quantum_lines.Program
 {
@@ -12,12 +14,15 @@ namespace quantum_lines.Program
     {
         private SchemeView _scheme;
         private OperatorsMenuView _operatorsMenu;
-
-        public ProgramView(/*возможно стартовый конфиг*/)
+        private MenuSchemeConnector _menuSchemeConnector;
+        public ProgramView(Dictionary<OperatorId, ToggleButton> operatorsMenuButtons)
         {
-            _scheme = new SchemeView(/*возможно сюда надо будет прокидывать этот конфиг*/);
-            _operatorsMenu = new OperatorsMenuView();
+            _menuSchemeConnector = new MenuSchemeConnector();
+            _scheme = new SchemeView(_menuSchemeConnector);
+            _operatorsMenu = new OperatorsMenuView(operatorsMenuButtons, _menuSchemeConnector);
         }
+
+
 
 
     }

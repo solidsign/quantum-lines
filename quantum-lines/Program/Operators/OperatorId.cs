@@ -4,6 +4,6 @@
     {
         Hadamard,
         Not,
-
+        Undefined,
     }
 }

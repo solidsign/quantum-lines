@@ -1,6 +1,19 @@
 ﻿namespace quantum_lines.Program.Operators
 {
-    internal class OperatorMenuItemViewModel
+    public class OperatorMenuItemViewModel
     {
+        private OperatorModel _model;
+        
+        public OperatorMenuItemViewModel(OperatorId id)
+        {
+            _model = OperatorModelsFactory.Create(id);
+        }
+
+        public void OnClick()
+        {
+            
+        }
+
+        public OperatorId OperatorId => _model.OperatorId;
     }
 }

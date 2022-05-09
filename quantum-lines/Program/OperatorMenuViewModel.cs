@@ -6,7 +6,11 @@ using System.Threading.Tasks;
 
 namespace quantum_lines.Program
 {
-    class OperatorMenuViewModel
+    public class OperatorMenuViewModel
     {
+        public OperatorMenuViewModel()
+        {
+
+        }
     }
 }

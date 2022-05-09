@@ -13,9 +13,9 @@ namespace quantum_lines.Program.Operators
             switch (operatorId)
             {
                 case OperatorId.Hadamard:
-                    return null;
+                    return new OperatorModel(operatorId, null, null);
                 case OperatorId.Not:
-                    return null;
+                    return new OperatorModel(operatorId, null, null);
                 default:
                     throw new ArgumentOutOfRangeException();
             }

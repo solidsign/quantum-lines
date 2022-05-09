@@ -19,16 +19,16 @@ namespace quantum_lines.Program.Operators
     public class OperatorModel
     {
         private Matrix<float> _matrix;
-        private OperatorClass _operatorClass;
         private BitmapImage _image;
         private OperatorId _operatorId;
         
-        public OperatorModel(OperatorId operatorId, Matrix<float> matrix, OperatorClass operatorClass, BitmapImage image)
+        public OperatorModel(OperatorId operatorId, Matrix<float> matrix, BitmapImage image)
         {
             _matrix = matrix;
-            _operatorClass = operatorClass;
             _image = image;
             _operatorId = operatorId;
         }
+
+        public OperatorId OperatorId => _operatorId;
     }
 }

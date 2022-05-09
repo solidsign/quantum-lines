@@ -1,4 +1,5 @@
-﻿using System;
+﻿using quantum_lines.Program;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -18,7 +19,13 @@ namespace quantum_lines
     // это все окно с кубитами и насаженными операторами
     public class SchemeView
     {
+        private MenuSchemeConnector _menuSchemeConnector;
         private List<QubitLineView> _qubitLines;
-        private Button _addNewLineButton;
+
+        public SchemeView(MenuSchemeConnector menuSchemeConnector)
+        {
+            _menuSchemeConnector = menuSchemeConnector;
+        }
+
     }
 }

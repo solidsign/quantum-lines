@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
@@ -23,19 +24,21 @@ namespace quantum_lines
     public partial class MainWindow : Window
     {
 
-
         private ProgramView _programView;
         public MainWindow()
         {
             InitializeComponent();
-            var buttons = new List<Button>();
-            buttons.Add(notMenuButton);
-            buttons.Add(hadamardMenuButton);
-            _programView = new ProgramView(); // <- от сюда по сути и идет инициализация всей приложухи
-            
+            _programView = new ProgramView(CreateMenuButtons()); // <- от сюда по сути и идет инициализация всей приложухи
+        }
+
+        private Dictionary<OperatorId, ToggleButton> CreateMenuButtons()
+        {
+            var buttons = new Dictionary<OperatorId, ToggleButton>();
+            buttons.Add(OperatorId.Not, notMenuButton);
+            buttons.Add(OperatorId.Hadamard, hadamardMenuButton);
+            return buttons;
         }
 
 
-        
     }
 }

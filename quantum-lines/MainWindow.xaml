@@ -7,7 +7,8 @@
         xmlns:dd="urn:gong-wpf-dragdrop"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-    <Canvas x:Name="CanvasMain" Width="800" Margin="0,0,0,0">
-        <Button x:Name="hadamardMenuButton" Content="Button" Canvas.Left="215" Canvas.Top="82" Height="51" Width="83"/>
+    <Canvas x:Name="CanvasMain" Width="800" Margin="0,0,0,-6">
+        <ToggleButton x:Name="hadamardMenuButton" Content="Button" Canvas.Left="170" Canvas.Top="34" Height="40" Width="57"/>
+        <ToggleButton x:Name="notMenuButton" Content="Button" Canvas.Left="278" Canvas.Top="34" Height="40" Width="70"/>
     </Canvas>
 </Window>

@@ -1,29 +1,35 @@
 ﻿using quantum_lines.Program.Operators;
 using System.Collections.Generic;
+using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
+using System.Linq;
 
 namespace quantum_lines.Program
 {
     public class OperatorsMenuView
     {
-        // тут должно быть разделение на виды операторов по блокам (как в Quirk'е: арифметические, крученые, верченые, ебанутые и тд)
-        private OperatorMenuViewModel _viewModel;
         private List<OperatorMenuItemView> _operators;
-        public OperatorsMenuView()
-        {
-            _operators = new List<OperatorMenuItemView>;
-            _viewModel = new OperatorMenuViewModel();
-            // тут должны подниматься все реализованные операторы
-            // и рассовываться по блокам
-            // 
-            // доставать все существующие операторы  и разделением их по разным стоит на уровне ViewModel
-            // а тут только визуально их распихивать
-            //
-            // ViewModel для OperatorsMenu можно просто в первой строчке создать написав что-то типа
-            // _viewModel = new OperatorsMenuViewModel(this);
-            // и дальше юзать информацию, которую предоставит _viewModel для расстановки
-            // _viewModel наверное надо будет хранить как поле в этом классе
-        }
+        private Dictionary<OperatorId, ToggleButton> _operatorsButtons;
 
-        // тут еще должна быть обработка нажатий по операторам
+        public OperatorsMenuView(Dictionary<OperatorId, ToggleButton> operatorsButtons, MenuSchemeConnector menuSchemeConnector)
+        {
+            menuSchemeConnector.SetAnyCheckedDel(AnyChecked);
+             menuSchemeConnector.OnSet += OnSet;
+            _operatorsButtons = operatorsButtons;
+            _operators = new List<OperatorMenuItemView>();
+
+            foreach (var operatorButton in operatorsButtons)
+            {
+                _operators.Add(new OperatorMenuItemView(operatorButton.Key, operatorButton.Value, menuSchemeConnector));
+            }
+
+        }
+        public bool AnyChecked() => _operatorsButtons.Any(x => x.Value.IsChecked.HasValue ? x.Value.IsChecked.Value : false);
+        private void OnSet(OperatorId oldId, OperatorId newId)
+        {
+            if (oldId == OperatorId.Undefined) return;
+            if (newId == OperatorId.Undefined) return;
+            _operatorsButtons[oldId].IsChecked = false;
+        }
     }
 }
