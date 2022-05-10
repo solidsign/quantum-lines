@@ -1,5 +1,4 @@
 ﻿using System;
-using quantum_lines.Program.Operators;
 
 namespace quantum_lines.Program
 {
@@ -8,21 +7,14 @@ namespace quantum_lines.Program
     public class MenuSchemeConnector
     {
         private OperatorId _operatorId = OperatorId.Undefined;
-        private OperatorModel _model = null;
         public event Action<OperatorId, OperatorId> OnSet;
         public delegate bool AnyCheckedDel();
         private AnyCheckedDel _anyChecked;
-        public void SetCurrentOperator(OperatorModel model)
+        public void SetCurrentOperator(OperatorId operatorId)
         {
-            if (model == null)
-            {
-                _model = null;
-                _operatorId = OperatorId.Undefined;
-                return;
-            }
-            if (_operatorId == model.OperatorId) return;
-            OnSet?.Invoke(_operatorId, model.OperatorId);
-            _operatorId = model.OperatorId;
+            if (_operatorId == operatorId) return;
+            OnSet?.Invoke(_operatorId, operatorId);
+            _operatorId = operatorId;
         }
 
         public void SetAnyCheckedDel(AnyCheckedDel anyCheckedDel) => _anyChecked = anyCheckedDel;
@@ -31,12 +23,7 @@ namespace quantum_lines.Program
             var res = _anyChecked?.Invoke(); 
             return res.HasValue ? res.Value : false;
         }
-        public OperatorModel GetCurrentOperatorModel()
-        {
-            return _model;
-        }
-
-        public OperatorId GetCurrentOperatorId()
+        public OperatorId GetCurrentOperator()
         {
             return _operatorId;
         }

@@ -23,13 +23,13 @@ namespace quantum_lines.Program.Operators
 
         private void Button_Checked(object sender, System.Windows.RoutedEventArgs e)
         {
-            _connector.SetCurrentOperator(_viewModel.Model);
+            _connector.SetCurrentOperator(_viewModel.OperatorId);
             _viewModel.OnClick();
         }
         private void Button_UnChecked(object sender, System.Windows.RoutedEventArgs e)
         {
             if (_connector.AnyChecked()) return;
-            _connector.SetCurrentOperator(null);
+            _connector.SetCurrentOperator(OperatorId.Undefined);
         }
 
     }
