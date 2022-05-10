@@ -12,12 +12,11 @@ namespace quantum_lines.Program
     {
         private SchemeView _scheme;
         private OperatorsMenuView _operatorsMenu;
-        private MenuSchemeConnector _menuSchemeConnector;
         public ProgramView(Dictionary<OperatorId, ToggleButton> operatorsMenuButtons, List<QubitLineArguments> qubitLineArguments)
         {
-            _menuSchemeConnector = new MenuSchemeConnector();
-            _scheme = new SchemeView(_menuSchemeConnector, qubitLineArguments);
-            _operatorsMenu = new OperatorsMenuView(operatorsMenuButtons, _menuSchemeConnector);
+            var menuSchemeConnector = new MenuSchemeConnector();
+            _scheme = new SchemeView(menuSchemeConnector, qubitLineArguments);
+            _operatorsMenu = new OperatorsMenuView(operatorsMenuButtons, menuSchemeConnector);
         }
 
 
