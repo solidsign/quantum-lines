@@ -23,12 +23,12 @@ namespace quantum_lines
     /// </summary>
     public partial class MainWindow : Window
     {
-
         private ProgramView _programView;
+        
         public MainWindow()
         {
             InitializeComponent();
-            _programView = new ProgramView(CreateMenuButtons()); // <- от сюда по сути и идет инициализация всей приложухи
+            _programView = new ProgramView(CreateMenuButtons(), CreateQubitLines()); // <- от сюда по сути и идет инициализация всей приложухи
         }
 
         private Dictionary<OperatorId, ToggleButton> CreateMenuButtons()
@@ -39,6 +39,10 @@ namespace quantum_lines
             return buttons;
         }
 
+        private List<QubitLineArguments> CreateQubitLines()
+        {
+            throw new NotImplementedException();
+        }
 
     }
 }

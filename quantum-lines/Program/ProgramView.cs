@@ -8,17 +8,15 @@ using System.Windows.Controls.Primitives;
 
 namespace quantum_lines.Program
 {
-    // он будет создаваться в MainWindow при старте приложухи
-    // и он типа каскадом будет создавать все вьюхи, вьюмодели, модели
     public class ProgramView
     {
         private SchemeView _scheme;
         private OperatorsMenuView _operatorsMenu;
         private MenuSchemeConnector _menuSchemeConnector;
-        public ProgramView(Dictionary<OperatorId, ToggleButton> operatorsMenuButtons)
+        public ProgramView(Dictionary<OperatorId, ToggleButton> operatorsMenuButtons, List<QubitLineArguments> qubitLineArguments)
         {
             _menuSchemeConnector = new MenuSchemeConnector();
-            _scheme = new SchemeView(_menuSchemeConnector);
+            _scheme = new SchemeView(_menuSchemeConnector, qubitLineArguments);
             _operatorsMenu = new OperatorsMenuView(operatorsMenuButtons, _menuSchemeConnector);
         }
 

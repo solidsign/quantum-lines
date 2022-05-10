@@ -12,15 +12,21 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using quantum_lines.Program;
+using quantum_lines.Program.Operators;
 
 namespace quantum_lines
 {
     public class OperatorsLineView
     {
-        public OperatorsLineView(/*наверное номер линии(исходя из него вычислять координаты линии) и мб стартовый набор операторов для него*/)
+        private List<OperatorOnLineView> _views;
+        public OperatorsLineView(Dictionary<OperatorId, Button> buttons, MenuSchemeConnector connector)
         {
-            // тут создаются сами линии для xaml'а
-            // и накидываюстя операторы, если есть какой-то дефолтный набор - возможно его стоит инициализировать из viewModel, который будет создавать модель и в этот момент чекать надо ли накинуть стартовых операторов
+            _views = new List<OperatorOnLineView>();
+            foreach (var i in buttons)
+            {
+                _views.Add(new OperatorOnLineView(i.Key, i.Value, connector));
+            }
         }
     }
 }

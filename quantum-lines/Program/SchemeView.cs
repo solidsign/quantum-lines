@@ -5,7 +5,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
@@ -19,12 +18,15 @@ namespace quantum_lines
     // это все окно с кубитами и насаженными операторами
     public class SchemeView
     {
-        private MenuSchemeConnector _menuSchemeConnector;
         private List<QubitLineView> _qubitLines;
 
-        public SchemeView(MenuSchemeConnector menuSchemeConnector)
+        public SchemeView(MenuSchemeConnector menuSchemeConnector, List<QubitLineArguments> qubitLines)
         {
-            _menuSchemeConnector = menuSchemeConnector;
+            _qubitLines = new List<QubitLineView>();
+            foreach (var qubitLine in qubitLines)
+            {
+                _qubitLines.Add(new QubitLineView(qubitLine.OperatorsLineButtons, qubitLine.StartValue, qubitLine.StartValueButton, menuSchemeConnector));
+            }
         }
 
     }

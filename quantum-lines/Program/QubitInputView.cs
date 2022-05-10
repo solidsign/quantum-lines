@@ -17,8 +17,15 @@ namespace quantum_lines
 {
     public class QubitInputView
     {
-        private Label _currentStartValue; // или кнопка??
-
+        private Button _currentValueButton;
+        private Qubit _currentQubitValue;
         // тут стоит добавить штуку, что когда нажимаешь на Label меняется стартовое значение как на Quirk
+        public QubitInputView(QubitBasisState startValue, Button button)
+        {
+            _currentQubitValue = new Qubit(startValue);
+
+            _currentValueButton = button;
+            _currentValueButton.Content = Qubit.BasisStateToString(startValue);
+        }
     }
 }

@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using quantum_lines.Program;
 
 namespace quantum_lines
 {
@@ -19,13 +20,11 @@ namespace quantum_lines
     {
         private QubitInputView _startValue;
         private OperatorsLineView _operatorsLine;
-        private Button _removeLineButton;
 
-        public QubitLineView(/*сюда скорее всего приходит номер линии и исходя из него все расставляется*/)
+        public QubitLineView(Dictionary<OperatorId, Button> operatorsLineButtons, QubitBasisState startValue, Button startValueButton, MenuSchemeConnector connector)
         {
-            _startValue = new QubitInputView(/*мб коорды и стартовое значение*/);
-            _operatorsLine = new OperatorsLineView(/*мб коорды и стартовое значение*/);
-            // и инициализация кнопки по коордам с прокидыванием события в SchemeView на удаление - для этого наверное в аргументах конструктора стоит принимать SchemeView
+            _startValue = new QubitInputView(startValue, startValueButton);
+            _operatorsLine = new OperatorsLineView(operatorsLineButtons, connector);
         }
     }
 }
