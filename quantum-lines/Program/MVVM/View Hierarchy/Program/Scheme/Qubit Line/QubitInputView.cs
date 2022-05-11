@@ -18,14 +18,29 @@ namespace quantum_lines
     public class QubitInputView
     {
         private Button _currentValueButton;
-        private Qubit _currentQubitValue;
-        // тут стоит добавить штуку, что когда нажимаешь на Label меняется стартовое значение как на Quirk
+        private QubitBasisState _basisState;
+        private Qubit _startQubitValue;
+
+        public Qubit StartValue => _startQubitValue;
+        
         public QubitInputView(QubitBasisState startValue, Button button)
         {
-            _currentQubitValue = new Qubit(startValue);
+            _startQubitValue = new Qubit(startValue);
+            _basisState = startValue;
 
             _currentValueButton = button;
             _currentValueButton.Content = Qubit.BasisStateToString(startValue);
+            _currentValueButton.Click += ChangeValueButtonOnClick;
+        }
+
+        private void ChangeValueButtonOnClick(object sender, RoutedEventArgs e)
+        {
+            int n = (int)_basisState + 1;
+            n %= Enum.GetValues(typeof(QubitBasisState)).Length;
+            var bs = (QubitBasisState) n;
+            _startQubitValue = new Qubit(bs);
+            _basisState = bs;
+            _currentValueButton.Content = Qubit.BasisStateToString(bs);
         }
     }
 }
