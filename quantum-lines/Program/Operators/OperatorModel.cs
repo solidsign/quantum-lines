@@ -17,21 +17,21 @@ using System.Windows.Shapes;
 
 namespace quantum_lines.Program.Operators
 {
-    public class OperatorModel
+    public abstract class OperatorModel
     {
-        private readonly Matrix<Complex> _matrix;
-        private readonly BitmapImage _image;
-        private readonly OperatorId _operatorId;
+        protected readonly BitmapImage _image;
+        protected readonly OperatorId _operatorId;
+        protected readonly OperatorClass _operatorClass;
         
-        public OperatorModel(OperatorId operatorId, Matrix<Complex> matrix, BitmapImage image)
+        protected OperatorModel(OperatorId operatorId, OperatorClass operatorClass, BitmapImage image)
         {
-            _matrix = matrix;
             _image = image;
             _operatorId = operatorId;
+            _operatorClass = operatorClass;
         }
 
+        public OperatorClass OperatorClass => _operatorClass;
         public OperatorId OperatorId => _operatorId;
-        public Matrix<Complex> Matrix => _matrix;
         public BitmapImage Image => _image;
     }
 }

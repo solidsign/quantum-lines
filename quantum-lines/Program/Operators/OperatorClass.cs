@@ -3,8 +3,7 @@
     public enum OperatorClass
     {
         None,
-        Arithmetic,
-        HalfTurns,
-
+        FixedMatrix,
+        QubitNumberParameteredMatrix
     }
 }

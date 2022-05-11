@@ -13,9 +13,11 @@ namespace quantum_lines.Program.Operators
             switch (operatorId)
             {
                 case OperatorId.Hadamard:
-                    return new OperatorModel(operatorId, null, null);
+                    return new FixedMatrixOperatorModel(operatorId, null, null);
                 case OperatorId.Not:
-                    return new OperatorModel(operatorId, null, null);
+                    return new FixedMatrixOperatorModel(operatorId, null, null);
+                case OperatorId.QFT:
+                    return new QFTOperatorModel(operatorId, null);
                 default:
                     throw new ArgumentOutOfRangeException();
             }

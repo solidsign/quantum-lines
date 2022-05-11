@@ -5,5 +5,6 @@
         Hadamard,
         Not,
         Undefined,
+        QFT,
     }
 }
