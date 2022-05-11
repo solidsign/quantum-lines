@@ -4,7 +4,7 @@
     {
         Hadamard,
         Not,
-        Undefined,
         QFT,
+        Undefined,
     }
 }

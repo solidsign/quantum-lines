@@ -43,7 +43,7 @@ namespace quantum_lines
 
         private List<QubitLineArguments> CreateQubitLines()
         {
-            throw new NotImplementedException();
+           throw new NotImplementedException();
         }
 
     }
