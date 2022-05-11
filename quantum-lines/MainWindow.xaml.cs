@@ -33,9 +33,11 @@ namespace quantum_lines
 
         private Dictionary<OperatorId, ToggleButton> CreateMenuButtons()
         {
-            var buttons = new Dictionary<OperatorId, ToggleButton>();
-            buttons.Add(OperatorId.Not, notMenuButton);
-            buttons.Add(OperatorId.Hadamard, hadamardMenuButton);
+            var buttons = new Dictionary<OperatorId, ToggleButton>
+            {
+                {OperatorId.Not, notMenuButton},
+                {OperatorId.Hadamard, hadamardMenuButton}
+            };
             return buttons;
         }
 
