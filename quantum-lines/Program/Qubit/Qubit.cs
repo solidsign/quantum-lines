@@ -70,7 +70,7 @@ namespace quantum_lines
             }
         }
 
-        public Possibility ONPossitility => new Possibility(Alpha.Magnitude * Alpha.Magnitude);
-        public Possibility OFFPossitility => new Possibility(Beta.Magnitude * Beta.Magnitude);
+        public Possibility ONPossitility => new Possibility(Beta.Magnitude * Beta.Magnitude);
+        public Possibility OFFPossitility => new Possibility(Alpha.Magnitude * Alpha.Magnitude);
     }
 }

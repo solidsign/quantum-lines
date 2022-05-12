@@ -20,9 +20,11 @@ namespace quantum_lines
     {
         private QubitInputView _startValue;
         private OperatorsLineView _operatorsLine;
+        private QubitResultView _qubitResult;
 
         public QubitLineView(QubitLineArguments args, MenuSchemeConnector connector)
         {
+            _qubitResult = new QubitResultView(args.QubitResultLabel);
             _startValue = new QubitInputView(args.StartValue, args.StartValueButton);
             _operatorsLine = new OperatorsLineView(args.OperatorsLineImages, connector);
         }
