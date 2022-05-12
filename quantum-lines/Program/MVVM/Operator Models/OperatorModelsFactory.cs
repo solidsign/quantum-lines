@@ -19,7 +19,7 @@ namespace quantum_lines.Program.Operators
                 case OperatorId.QFT:
                     return new QFTOperatorModel(operatorId, null);
                 default:
-                    throw new ArgumentOutOfRangeException();
+                    return new FixedMatrixOperatorModel(operatorId, null, null);
             }
         }
     }
