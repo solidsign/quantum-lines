@@ -45,7 +45,12 @@ namespace quantum_lines
         
         private List<QubitLineArguments> CreateQubitLines()
         {
+            var button = new Dictionary<OperatorId, Button>
+            {
+                {OperatorId.Hadamard, qubitBasisStateButton}
+            };
             List<QubitLineArguments> qubitLineArguments = new List<QubitLineArguments>();
+            qubitLineArguments.Add(new QubitLineArguments(qubitBasisStateButton, QubitBasisState.Zero, button)); // Я ЧЕ ЕБУ ЧЕ ЗДЕСЬ НАДО ПОСТАВИТЬ ЗАМЕСТО 3 ПАРАМЕТРА
             return qubitLineArguments;
         }
 
