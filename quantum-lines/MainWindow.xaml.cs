@@ -54,7 +54,7 @@ namespace quantum_lines
                 (OperatorId.Undefined, fifthQBitImage),
             };
             List<QubitLineArguments> qubitLineArguments = new List<QubitLineArguments>();
-            qubitLineArguments.Add(new QubitLineArguments(qubitBasisStateButton, QubitBasisState.Zero, images, qubitResult)); // Я ЧЕ ЕБУ ЧЕ ЗДЕСЬ НАДО ПОСТАВИТЬ ЗАМЕСТО 3 ПАРАМЕТРА
+            qubitLineArguments.Add(new QubitLineArguments(qubitBasisStateButton, QubitBasisState.Zero, images, qubitResult)); 
             return qubitLineArguments;
         }
 
