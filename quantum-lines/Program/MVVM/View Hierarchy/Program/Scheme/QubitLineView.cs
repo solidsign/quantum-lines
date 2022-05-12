@@ -21,10 +21,10 @@ namespace quantum_lines
         private QubitInputView _startValue;
         private OperatorsLineView _operatorsLine;
 
-        public QubitLineView(Dictionary<OperatorId, Button> operatorsLineButtons, QubitBasisState startValue, Button startValueButton, MenuSchemeConnector connector)
+        public QubitLineView(QubitLineArguments args, MenuSchemeConnector connector)
         {
-            _startValue = new QubitInputView(startValue, startValueButton);
-            _operatorsLine = new OperatorsLineView(operatorsLineButtons, connector);
+            _startValue = new QubitInputView(args.StartValue, args.StartValueButton);
+            _operatorsLine = new OperatorsLineView(args.OperatorsLineImages, connector);
         }
     }
 }

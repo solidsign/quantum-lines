@@ -17,8 +17,11 @@
                 <LineGeometry StartPoint="10,200" EndPoint="800,200" />
             </Path.Data>
         </Path>
-        <Image x:Name="firstQBitImage" Height="50" Canvas.Left="46" Canvas.Top="176" Width="50" Source="/Picture/clearOperatorOnLine.png"/>
+        <Image x:Name="firstQBitImage" Height="50" Canvas.Left="45" Canvas.Top="176" Width="50" Source="/Picture/clearOperatorOnLine.png"/>
         <Image x:Name="secondQBitImage"  Height="50" Canvas.Left="145" Canvas.Top="176" Width="50" Source="/Picture/clearOperatorOnLine.png"/>
+        <Image x:Name="thirdQBitImage"  Height="50" Canvas.Left="245" Canvas.Top="176" Width="50" Source="/Picture/clearOperatorOnLine.png"/>
+        <Image x:Name="fourthQBitImage"  Height="50" Canvas.Left="345" Canvas.Top="176" Width="50" Source="/Picture/clearOperatorOnLine.png"/>
+        <Image x:Name="fifthQBitImage"  Height="50" Canvas.Left="445" Canvas.Top="176" Width="50" Source="/Picture/clearOperatorOnLine.png"/>
         <Image x:Name="basisImage" Height="35" Canvas.Left="-2" Canvas.Top="179" Width="39"/>
 
     </Canvas>

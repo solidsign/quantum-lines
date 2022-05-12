@@ -14,11 +14,11 @@ namespace quantum_lines.Program.Operators
         private OperatorOnLineViewModel _viewModel;
         private MenuSchemeConnector _connector;
 
-        public OperatorOnLineView(OperatorId operatorId, Button button, MenuSchemeConnector connector)
+        public OperatorOnLineView(OperatorId operatorId, Image image, MenuSchemeConnector connector)
         {
             _connector = connector;
             _viewModel = new OperatorOnLineViewModel(operatorId);
-            button.Click += ButtonOnClick;
+            image.MouseLeftButtonDown += ButtonOnClick;
         }
 
         private void ButtonOnClick(object sender, RoutedEventArgs e)

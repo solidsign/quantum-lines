@@ -25,7 +25,7 @@ namespace quantum_lines
             _qubitLines = new List<QubitLineView>();
             foreach (var qubitLine in qubitLines)
             {
-                _qubitLines.Add(new QubitLineView(qubitLine.OperatorsLineButtons, qubitLine.StartValue, qubitLine.StartValueButton, menuSchemeConnector));
+                _qubitLines.Add(new QubitLineView(qubitLine, menuSchemeConnector));
             }
         }
 

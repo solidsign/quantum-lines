@@ -2,9 +2,9 @@
 {
     public enum OperatorId
     {
+        Undefined,
         Hadamard,
         Not,
         QFT,
-        Undefined,
     }
 }

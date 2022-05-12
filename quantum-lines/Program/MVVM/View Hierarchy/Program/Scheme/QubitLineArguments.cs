@@ -5,15 +5,15 @@ namespace quantum_lines
 {
     public class QubitLineArguments
     {
-        public readonly Dictionary<OperatorId, Button> OperatorsLineButtons;
+        public readonly Dictionary<OperatorId, Image> OperatorsLineImages;
         public readonly QubitBasisState StartValue;
         public readonly Button StartValueButton;
 
-        public QubitLineArguments(Button startValueButton, QubitBasisState startValue, Dictionary<OperatorId, Button> operatorsLineButtons)
+        public QubitLineArguments(Button startValueButton, QubitBasisState startValue, Dictionary<OperatorId, Image> operatorsLineImages)
         {
             StartValueButton = startValueButton;
             StartValue = startValue;
-            OperatorsLineButtons = operatorsLineButtons;
+            OperatorsLineImages = operatorsLineImages;
         }
     }
 }

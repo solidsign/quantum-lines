@@ -45,12 +45,16 @@ namespace quantum_lines
         
         private List<QubitLineArguments> CreateQubitLines()
         {
-            var button = new Dictionary<OperatorId, Button>
+            var images = new Dictionary<OperatorId, Image>
             {
-                {OperatorId.Hadamard, qubitBasisStateButton}
+                {OperatorId.Undefined, firstQBitImage},
+                {OperatorId.Undefined, secondQBitImage},
+                {OperatorId.Undefined, thirdQBitImage},
+                {OperatorId.Undefined, fourthQBitImage},
+                {OperatorId.Undefined, fifthQBitImage},
             };
             List<QubitLineArguments> qubitLineArguments = new List<QubitLineArguments>();
-            qubitLineArguments.Add(new QubitLineArguments(qubitBasisStateButton, QubitBasisState.Zero, button)); // Я ЧЕ ЕБУ ЧЕ ЗДЕСЬ НАДО ПОСТАВИТЬ ЗАМЕСТО 3 ПАРАМЕТРА
+            qubitLineArguments.Add(new QubitLineArguments(qubitBasisStateButton, QubitBasisState.Zero, images)); // Я ЧЕ ЕБУ ЧЕ ЗДЕСЬ НАДО ПОСТАВИТЬ ЗАМЕСТО 3 ПАРАМЕТРА
             return qubitLineArguments;
         }
 
