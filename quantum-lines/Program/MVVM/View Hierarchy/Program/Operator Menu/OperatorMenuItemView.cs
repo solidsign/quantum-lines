@@ -29,7 +29,7 @@ namespace quantum_lines.Program.Operators
         private void Button_UnChecked(object sender, System.Windows.RoutedEventArgs e)
         {
             if (_connector.AnyChecked()) return;
-            _connector.SetCurrentOperator(OperatorId.Undefined);
+            _connector.SetCurrentOperator(OperatorId.Empty);
         }
 
     }

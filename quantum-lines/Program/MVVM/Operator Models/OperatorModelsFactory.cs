@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Media.Imaging;
 
 namespace quantum_lines.Program.Operators
 {
@@ -12,8 +13,10 @@ namespace quantum_lines.Program.Operators
         {
             switch (operatorId)
             {
+                case OperatorId.Empty:
+                    return new EmptyOperatorModel();
                 case OperatorId.Hadamard:
-                    return new FixedMatrixOperatorModel(operatorId, null, null);
+                    return new FixedMatrixOperatorModel(operatorId, null, new BitmapImage(new Uri(@"\Picture\myPhoto.png", UriKind.Relative)));
                 case OperatorId.Not:
                     return new FixedMatrixOperatorModel(operatorId, null, null);
                 case OperatorId.QFT:

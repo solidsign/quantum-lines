@@ -13,11 +13,12 @@ namespace quantum_lines.Program.Operators
     {
         private OperatorOnLineViewModel _viewModel;
         private MenuSchemeConnector _connector;
-
+        private Image _image;
         public OperatorOnLineView(OperatorId operatorId, Image image, MenuSchemeConnector connector)
         {
             _connector = connector;
             _viewModel = new OperatorOnLineViewModel(operatorId);
+            _image = image;
             image.MouseLeftButtonDown += ButtonOnClick;
         }
 
@@ -29,7 +30,7 @@ namespace quantum_lines.Program.Operators
 
         private void ChangeButtonImage()
         {
-
+            _image.Source = _viewModel.Image;
             // TODO
         }
     }
@@ -37,7 +38,7 @@ namespace quantum_lines.Program.Operators
     public class OperatorOnLineViewModel
     {
         private OperatorModel _model;
-
+        
         public BitmapImage Image => _model.Image;
         public OperatorId OperatorId => _model.OperatorId;
         

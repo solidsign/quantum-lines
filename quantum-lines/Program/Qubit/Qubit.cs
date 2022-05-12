@@ -10,7 +10,7 @@ namespace quantum_lines
         
         /// <summary>
         /// Коэф при |0>
-        /// </summary>
+        /// </summary>  
         public Complex Alpha => StateMatrix[0, 0];
         
         /// <summary>
@@ -45,9 +45,15 @@ namespace quantum_lines
                     StateMatrix[1,0] = Complex.One;
                     break;
                 case QubitBasisState.Plus:
-                    throw new NotImplementedException();
+                    StateMatrix[0, 0] = new Complex(0.707106781, 0);
+                    StateMatrix[1, 0] = new Complex(0.707106781, 0);
+                    break;
+
                 case QubitBasisState.Minus:
-                    throw new NotImplementedException();
+                    StateMatrix[0, 0] = new Complex(0.707106781, 0);
+                    StateMatrix[1, 0] = new Complex(-0.707106781, 0);
+                    break;
+
                 default:
                     throw new ArgumentOutOfRangeException(nameof(basisState), basisState, null);
             }
@@ -64,7 +70,7 @@ namespace quantum_lines
                 case QubitBasisState.Plus:
                     return "|+>";
                 case QubitBasisState.Minus:
-                    return "|+>";
+                    return "|->";
                 default:
                     throw new ArgumentOutOfRangeException(nameof(startValue), startValue, null);
             }

@@ -27,6 +27,8 @@ namespace quantum_lines.Program
         public bool AnyChecked() => _operatorsButtons.Any(x => x.Value.IsChecked.HasValue ? x.Value.IsChecked.Value : false);
         private void OnSet(OperatorId oldId, OperatorId newId)
         {
+            if (newId == OperatorId.Empty) return;
+            if (oldId == OperatorId.Empty) return;
             if (oldId == OperatorId.Undefined) return;
             if (newId == OperatorId.Undefined) return;
             _operatorsButtons[oldId].IsChecked = false;

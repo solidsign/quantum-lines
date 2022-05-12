@@ -6,7 +6,7 @@ namespace quantum_lines.Program.Operators
 {
     public class FixedMatrixOperatorModel : OperatorModel
     {
-        private readonly Matrix<Complex> _matrix;
+        protected readonly Matrix<Complex> _matrix;
 
         public FixedMatrixOperatorModel(OperatorId operatorId, Matrix<Complex> matrix, BitmapImage image) : base(
             operatorId, OperatorClass.FixedMatrix, image)
