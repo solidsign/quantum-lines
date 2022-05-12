@@ -9,7 +9,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="clearOperatorOnLine.png" />
     <None Remove="myPhoto.png" />
+    <None Remove="Picture\clearOperatorOnLine.png" />
+    <None Remove="Picture\myPhoto.png" />
+    <None Remove="Picture\pngwing.com.png" />
+    <None Remove="Picture\Безымянный.png" />
     <None Remove="pngwing.com.png" />
     <None Remove="Безымянный.png" />
   </ItemGroup>
@@ -20,9 +25,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Resource Include="myPhoto.png" />
-    <Resource Include="pngwing.com.png" />
-    <Resource Include="Безымянный.png" />
+    <Resource Include="Picture\clearOperatorOnLine.png" />
+    <Resource Include="Picture\myPhoto.png" />
+    <Resource Include="Picture\pngwing.com.png" />
+    <Resource Include="Picture\qbit.png" />
+    <Resource Include="Picture\Безымянный.png" />
   </ItemGroup>
 
 </Project>

@@ -9,15 +9,17 @@
         Title="MainWindow" Height="450" Width="800">
     <Canvas x:Name="CanvasMain" Width="800" Margin="0,0,0,-6">
         <ToggleButton x:Name="hadamardMenuButton" Content="Button" Canvas.Left="170" Canvas.Top="34" Height="40" Width="57"/>
-        <ToggleButton x:Name="notMenuButton" Content="Button" Canvas.Left="278" Canvas.Top="34" Height="40" Width="70"/>
+        <ToggleButton x:Name="notMenuButton" Content="Button" Canvas.Left="278" Canvas.Top="34" Height="40" Width="70" />
+        <ToggleButton x:Name="QFTMenuButton"  Content="QFTMenuButton" Canvas.Left="385" Canvas.Top="34" Height="40" Width="75"/>
+        <Button x:Name="QubitBasisStateButton" Content="|0&gt;" Height="40" Width="75" />
         <Path Stroke="Black" StrokeThickness="1" >
             <Path.Data>
                 <LineGeometry StartPoint="10,200" EndPoint="800,200" />
             </Path.Data>
         </Path>
-        <Image Height="50" Canvas.Left="46" Canvas.Top="176" Width="50"/>
-        <Image Height="50" Canvas.Left="145" Canvas.Top="176" Width="50"/>
-        <Button x:Name="QFTMenuButton"  Content="QFTMenuButton" Canvas.Left="385" Canvas.Top="34" Height="40" Width="75"/>
+        <Image x:Name="firstQBitImage" Height="50" Canvas.Left="46" Canvas.Top="176" Width="50" Source="/Picture/clearOperatorOnLine.png"/>
+        <Image x:Name="secondQBitImage"  Height="50" Canvas.Left="145" Canvas.Top="176" Width="50" Source="/Picture/clearOperatorOnLine.png"/>
+        <Image x:Name="basisImage" Height="26" Canvas.Left="-2" Canvas.Top="188" Width="24"/>
 
     </Canvas>
 </Window>

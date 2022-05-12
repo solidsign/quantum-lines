@@ -36,14 +36,17 @@ namespace quantum_lines
             var buttons = new Dictionary<OperatorId, ToggleButton>
             {
                 {OperatorId.Not, notMenuButton},
-                {OperatorId.Hadamard, hadamardMenuButton}
+                {OperatorId.Hadamard, hadamardMenuButton},
+                {OperatorId.QFT, QFTMenuButton}
             };
             return buttons;
         }
 
+        
         private List<QubitLineArguments> CreateQubitLines()
         {
-           throw new NotImplementedException();
+            List<QubitLineArguments> qubitLineArguments = new List<QubitLineArguments>();
+            return qubitLineArguments;
         }
 
     }

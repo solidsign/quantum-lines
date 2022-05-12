@@ -29,6 +29,7 @@ namespace quantum_lines.Program.Operators
 
         private void ChangeButtonImage()
         {
+
             // TODO
         }
     }
