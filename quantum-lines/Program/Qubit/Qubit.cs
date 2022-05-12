@@ -6,23 +6,43 @@ namespace quantum_lines
 {
     public struct Qubit
     {
-        public Matrix<Complex> State;
+        public Matrix<Complex> StateMatrix;
+        
+        /// <summary>
+        /// Коэф при |0>
+        /// </summary>
+        public Complex Alpha => StateMatrix[0, 0];
+        
+        /// <summary>
+        /// Коэф при |1>
+        /// </summary>
+        public Complex Beta => StateMatrix[1, 0];
 
-        public Qubit(Matrix<Complex> state)
+        public Qubit(Matrix<Complex> stateMatrix)
         {
-            State = state;
+            StateMatrix = stateMatrix;
+        }
+
+        public Qubit(Complex alpha, Complex beta)
+        {
+            StateMatrix = new Matrix<Complex>(new Complex[2,1]{{alpha},{beta}});
+        }
+        
+        public Qubit(double alpha, double beta)
+        {
+            StateMatrix = new Matrix<Complex>(new Complex[2,1]{{alpha},{beta}});
         }
         
         public Qubit(QubitBasisState basisState)
         {
-            State = new Matrix<Complex>(2, 1, Complex.Zero);
+            StateMatrix = new Matrix<Complex>(2, 1, Complex.Zero);
             switch (basisState)
             {
                 case QubitBasisState.Zero:
-                    State[0,0] = Complex.One;
+                    StateMatrix[0,0] = Complex.One;
                     break;
                 case QubitBasisState.One:
-                    State[1,0] = Complex.One;
+                    StateMatrix[1,0] = Complex.One;
                     break;
                 case QubitBasisState.Plus:
                     throw new NotImplementedException();
@@ -49,5 +69,8 @@ namespace quantum_lines
                     throw new ArgumentOutOfRangeException(nameof(startValue), startValue, null);
             }
         }
+
+        public Possibility ONPossitility => new Possibility(Alpha.Magnitude * Alpha.Magnitude);
+        public Possibility OFFPossitility => new Possibility(Beta.Magnitude * Beta.Magnitude);
     }
 }
