@@ -47,13 +47,13 @@ namespace quantum_lines
         {
             var images = new List<(OperatorId id, Image image)>
             {
-                (OperatorId.Undefined, firstQBitImage),
-                (OperatorId.Undefined, secondQBitImage),
-                (OperatorId.Undefined, thirdQBitImage),
-                (OperatorId.Undefined, fourthQBitImage),
-                (OperatorId.Undefined, fifthQBitImage),
+                (OperatorId.Empty, firstQBitImage),
+                (OperatorId.Empty, secondQBitImage),
+                (OperatorId.Empty, thirdQBitImage),
+                (OperatorId.Empty, fourthQBitImage),
+                (OperatorId.Empty, fifthQBitImage),
             };
-            List<QubitLineArguments> qubitLineArguments = new List<QubitLineArguments>();
+            List<QubitLineArguments> qubitLineArguments = new List<QubitLineArguments>();   
             qubitLineArguments.Add(new QubitLineArguments(qubitBasisStateButton, QubitBasisState.Zero, images, qubitResult)); 
             return qubitLineArguments;
         }
