@@ -6,7 +6,7 @@ namespace quantum_lines.Program
 
     public class MenuSchemeConnector
     {
-        private OperatorId _operatorId = OperatorId.Undefined;
+        private OperatorId _operatorId = OperatorId.Empty;
         public event Action<OperatorId, OperatorId> OnSet;
         public delegate bool AnyCheckedDel();
         private AnyCheckedDel _anyChecked;
