@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Media.Imaging;
+using MatrixDotNet;
 
 namespace quantum_lines.Program.Operators
 {
@@ -16,9 +18,9 @@ namespace quantum_lines.Program.Operators
                 case OperatorId.Empty:
                     return new EmptyOperatorModel();
                 case OperatorId.Hadamard:
-                    return new FixedMatrixOperatorModel(operatorId, null, new BitmapImage(new Uri(@"\Picture\OperatorHadamar.png", UriKind.Relative)));
+                    return new FixedMatrixOperatorModel(operatorId, new Matrix<Complex>(new Complex[2, 2] { { 1, 1 }, { 1, -1 } }), new BitmapImage(new Uri(@"\Picture\OperatorHadamar.png", UriKind.Relative)));   //( матрица ввида (1 1)\(1 -1)
                 case OperatorId.Not:
-                    return new FixedMatrixOperatorModel(operatorId, null, new BitmapImage(new Uri(@"\Picture\OperatorNot.png", UriKind.Relative)));
+                    return new FixedMatrixOperatorModel(operatorId, new Matrix<Complex>(new Complex[2, 2] { {0, 1}, {1, 0} }), new BitmapImage(new Uri(@"\Picture\OperatorNot.png", UriKind.Relative))); //(матрица ввида(0, 1)/(1, 0)
                 case OperatorId.QFT:
                     return new QFTOperatorModel(operatorId, null);
                 default:
