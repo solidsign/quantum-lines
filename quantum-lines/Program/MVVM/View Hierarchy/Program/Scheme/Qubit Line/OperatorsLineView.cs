@@ -20,14 +20,17 @@ namespace quantum_lines
     public class OperatorsLineView
     {
         private List<OperatorOnLineView> _views;
-        public OperatorsLineView(List<(OperatorId id, Image image)> images, MenuSchemeConnector connector)
+        public OperatorsLineView(List<(OperatorId id, Image image)> images, MenuSchemeConnector connector, Action<List<OperatorOnLineModel>> addLine)
         {
-            
+            var operatorModels = new List<OperatorOnLineModel>(images.Count);
             _views = new List<OperatorOnLineView>();
             foreach (var i in images)
             {
-                _views.Add(new OperatorOnLineView(i.id, i.image, connector));
+                _views.Add(new OperatorOnLineView(i.id, i.image, connector, AddModel));
             }
+            addLine(operatorModels);
+            
+            void AddModel(OperatorOnLineModel model) => operatorModels.Add(model);
         }
     }
 }

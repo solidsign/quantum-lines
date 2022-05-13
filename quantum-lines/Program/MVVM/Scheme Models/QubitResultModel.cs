@@ -4,23 +4,19 @@ namespace quantum_lines
 {
     public class QubitResultModel
     {
-        private Qubit _value;
+        public Qubit Value { get; private set; }
 
-        public Qubit Value
+        public void SetResult(Qubit value)
         {
-            get => _value;
-            set
-            {
-                _value = value;
-                ResultUpdated?.Invoke();
-            }
+            Value = value;
+            ResultUpdated?.Invoke();
         }
 
         public event Action ResultUpdated; 
         
         public QubitResultModel()
         {
-            _value = new Qubit(QubitBasisState.Zero);
+            Value = new Qubit(QubitBasisState.Zero);
         }
     }
 }

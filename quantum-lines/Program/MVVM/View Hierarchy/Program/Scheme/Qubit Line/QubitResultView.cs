@@ -8,9 +8,9 @@ namespace quantum_lines
         private QubitResultViewModel _viewModel;
         private Label _label;
 
-        public QubitResultView(Label label)
+        public QubitResultView(Label label, Action<QubitResultModel> addResult)
         {
-            _viewModel = new QubitResultViewModel();
+            _viewModel = new QubitResultViewModel(addResult);
             _viewModel.ResultUpdate += UpdateLabel;
             _label = label;
             _label.Content = _viewModel.ONPossibility;
@@ -29,9 +29,10 @@ namespace quantum_lines
             remove => _model.ResultUpdated -= value;
         }
 
-        public QubitResultViewModel()
+        public QubitResultViewModel(Action<QubitResultModel> addResult)
         {
             _model = new QubitResultModel();
+            addResult(_model);
         }
     }
 }

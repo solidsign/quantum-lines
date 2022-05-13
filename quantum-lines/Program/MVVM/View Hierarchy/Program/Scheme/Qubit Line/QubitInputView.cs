@@ -21,9 +21,9 @@ namespace quantum_lines
         
         private QubitInputViewModel _viewModel;
         
-        public QubitInputView(QubitBasisState startValue, Button button)
+        public QubitInputView(QubitBasisState startValue, Button button, Action<QubitInputModel> addInput)
         {
-            _viewModel = new QubitInputViewModel(startValue);
+            _viewModel = new QubitInputViewModel(startValue, addInput);
 
             _currentValueButton = button;
             _currentValueButton.Content = _viewModel.QubitState;
@@ -43,10 +43,11 @@ namespace quantum_lines
         private QubitBasisState _basisState;
 
         public string QubitState => Qubit.BasisStateToString(_basisState);
-        public QubitInputViewModel(QubitBasisState startValue)
+        public QubitInputViewModel(QubitBasisState startValue, Action<QubitInputModel> addInput)
         {
             _basisState = startValue;
             _model = new QubitInputModel(startValue);
+            addInput(_model);
         }
         public void SwitchState()
         {
