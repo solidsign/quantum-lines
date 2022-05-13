@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using quantum_lines.Program;
+using quantum_lines.Program.Operators;
 
 namespace quantum_lines
 {
@@ -22,11 +23,13 @@ namespace quantum_lines
         private OperatorsLineView _operatorsLine;
         private QubitResultView _qubitResult;
 
-        public QubitLineView(QubitLineArguments args, MenuSchemeConnector connector)
+        public QubitLineView(QubitLineArguments args, MenuSchemeConnector connector, Action<QubitResultModel> addResult, Action<QubitInputModel> addInput, Action<List<OperatorOnLineModel>> addLine)
         {
-            _qubitResult = new QubitResultView(args.QubitResultLabel);
-            _startValue = new QubitInputView(args.StartValue, args.StartValueButton);
-            _operatorsLine = new OperatorsLineView(args.OperatorsLineImages, connector);
+            _qubitResult = new QubitResultView(args.QubitResultLabel, addResult);
+            _startValue = new QubitInputView(args.StartValue, args.StartValueButton, addInput);
+            _operatorsLine = new OperatorsLineView(args.OperatorsLineImages, connector, addLine);
+            
+            
         }
     }
 }

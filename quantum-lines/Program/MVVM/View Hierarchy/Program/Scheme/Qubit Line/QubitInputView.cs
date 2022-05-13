@@ -18,29 +18,43 @@ namespace quantum_lines
     public class QubitInputView
     {
         private Button _currentValueButton;
-        private QubitBasisState _basisState;
-        private Qubit _startQubitValue;
-
-        public Qubit StartValue => _startQubitValue;
         
-        public QubitInputView(QubitBasisState startValue, Button button)
+        private QubitInputViewModel _viewModel;
+        
+        public QubitInputView(QubitBasisState startValue, Button button, Action<QubitInputModel> addInput)
         {
-            _startQubitValue = new Qubit(startValue);
-            _basisState = startValue;
+            _viewModel = new QubitInputViewModel(startValue, addInput);
 
             _currentValueButton = button;
-            _currentValueButton.Content = Qubit.BasisStateToString(startValue);
+            _currentValueButton.Content = _viewModel.QubitState;
             _currentValueButton.Click += ChangeValueButtonOnClick;
         }
 
         private void ChangeValueButtonOnClick(object sender, RoutedEventArgs e)
         {
+            _viewModel.SwitchState();
+            _currentValueButton.Content = _viewModel.QubitState;
+        }
+    }
+
+    public class QubitInputViewModel
+    {
+        private QubitInputModel _model;
+        private QubitBasisState _basisState;
+
+        public string QubitState => Qubit.BasisStateToString(_basisState);
+        public QubitInputViewModel(QubitBasisState startValue, Action<QubitInputModel> addInput)
+        {
+            _basisState = startValue;
+            _model = new QubitInputModel(startValue);
+            addInput(_model);
+        }
+        public void SwitchState()
+        {
             int n = (int)_basisState + 1;
             n %= Enum.GetValues(typeof(QubitBasisState)).Length;
-            var bs = (QubitBasisState) n;
-            _startQubitValue = new Qubit(bs);
-            _basisState = bs;
-            _currentValueButton.Content = Qubit.BasisStateToString(bs);
+            _basisState = (QubitBasisState) n;
+            _model.UpdateValue(_basisState);
         }
     }
 }
