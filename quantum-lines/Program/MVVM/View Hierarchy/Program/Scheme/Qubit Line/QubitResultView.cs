@@ -25,35 +25,13 @@ namespace quantum_lines
         public string ONPossibility => _model.Value.ONPossitility.ToString();
         public event Action ResultUpdate
         {
-            add => _model.ResultUpdate += value;
-            remove => _model.ResultUpdate -= value;
+            add => _model.ResultUpdated += value;
+            remove => _model.ResultUpdated -= value;
         }
 
         public QubitResultViewModel()
         {
             _model = new QubitResultModel();
-        }
-    }
-
-    public class QubitResultModel
-    {
-        private Qubit _value;
-
-        public Qubit Value
-        {
-            get => _value;
-            set
-            {
-                _value = value;
-                ResultUpdate?.Invoke();
-            }
-        }
-
-        public event Action ResultUpdate; 
-        
-        public QubitResultModel()
-        {
-            _value = new Qubit(QubitBasisState.Zero);
         }
     }
 }
