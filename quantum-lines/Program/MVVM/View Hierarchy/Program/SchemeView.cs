@@ -61,5 +61,25 @@ namespace quantum_lines
                 model.OperatorOnLineUpdated += _model.InvokeSchemeUpdated;
             }
         }
+        
+        public void RemoveInput(QubitInputModel model)
+        {
+            model.ValueUpdated -= _model.InvokeSchemeUpdated;
+            _model.Inputs.Remove(model);
+        }
+
+        public void RemoveResult(QubitResultModel model)
+        {
+            _model.Results.Remove(model);
+        }
+
+        public void RemoveLine(List<OperatorOnLineModel> models)
+        {
+            foreach (var model in models)
+            {
+                model.OperatorOnLineUpdated -= _model.InvokeSchemeUpdated;
+            }
+            _model.OperatorLines.Remove(models);
+        }
     }
 }
