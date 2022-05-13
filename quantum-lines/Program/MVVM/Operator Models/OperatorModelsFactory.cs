@@ -16,9 +16,9 @@ namespace quantum_lines.Program.Operators
                 case OperatorId.Empty:
                     return new EmptyOperatorModel();
                 case OperatorId.Hadamard:
-                    return new FixedMatrixOperatorModel(operatorId, null, new BitmapImage(new Uri(@"\Picture\myPhoto.png", UriKind.Relative)));
+                    return new FixedMatrixOperatorModel(operatorId, null, new BitmapImage(new Uri(@"\Picture\OperatorHadamar.png", UriKind.Relative)));
                 case OperatorId.Not:
-                    return new FixedMatrixOperatorModel(operatorId, null, null);
+                    return new FixedMatrixOperatorModel(operatorId, null, new BitmapImage(new Uri(@"\Picture\OperatorNot.png", UriKind.Relative)));
                 case OperatorId.QFT:
                     return new QFTOperatorModel(operatorId, null);
                 default:

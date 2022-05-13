@@ -13,6 +13,8 @@
     <None Remove="myPhoto.png" />
     <None Remove="Picture\clearOperatorOnLine.png" />
     <None Remove="Picture\myPhoto.png" />
+    <None Remove="Picture\OperatorHadamar.png" />
+    <None Remove="Picture\OperatorNot.png" />
     <None Remove="Picture\pngwing.com.png" />
     <None Remove="Picture\Безымянный.png" />
     <None Remove="pngwing.com.png" />
@@ -27,6 +29,8 @@
   <ItemGroup>
     <Resource Include="Picture\clearOperatorOnLine.png" />
     <Resource Include="Picture\myPhoto.png" />
+    <Resource Include="Picture\OperatorHadamar.png" />
+    <Resource Include="Picture\OperatorNot.png" />
     <Resource Include="Picture\pngwing.com.png" />
     <Resource Include="Picture\qbit.png" />
     <Resource Include="Picture\Безымянный.png" />
