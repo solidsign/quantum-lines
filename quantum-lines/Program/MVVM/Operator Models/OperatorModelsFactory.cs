@@ -22,9 +22,13 @@ namespace quantum_lines.Program.Operators
                 case OperatorId.Not:
                     return new FixedMatrixOperatorModel(operatorId, new Matrix<Complex>(new Complex[2, 2] { {0, 1}, {1, 0} }), new BitmapImage(new Uri(@"\Picture\OperatorNot.png", UriKind.Relative))); //(матрица ввида(0, 1)/(1, 0)
                 case OperatorId.QFT:
-                    return new QFTOperatorModel(operatorId, null);
+                    return new QFTOperatorModel(null); // TODO
+                case OperatorId.Control:
+                    return new ControlOperatorModel(null); // TODO
+                case OperatorId.AntiControl:
+                    return new AntiControlOperatorModel(null); // TODO
                 default:
-                    return new FixedMatrixOperatorModel(operatorId, null, null);
+                    return new EmptyOperatorModel();
             }
         }
     }

@@ -6,7 +6,7 @@ namespace quantum_lines.Program.Operators
 {
     public class QFTOperatorModel : OperatorModel
     {
-        public QFTOperatorModel(OperatorId operatorId, BitmapImage image) : base(operatorId, OperatorClass.QubitNumberParameteredMatrix, image)
+        public QFTOperatorModel(BitmapImage image) : base(OperatorId.QFT, OperatorClass.QubitNumberParameteredMatrix, image)
         {
         }
 

@@ -7,5 +7,7 @@
         Not,
         QFT,
         Empty,
+        Control,
+        AntiControl
     }
 }
