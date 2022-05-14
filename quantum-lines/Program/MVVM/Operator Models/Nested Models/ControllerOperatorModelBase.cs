@@ -10,6 +10,6 @@ namespace quantum_lines.Program.Operators
         {
         }
 
-        public abstract Matrix<Complex> ControlMatrix(Matrix<Complex> matrixWithoutControls);
+        public abstract Matrix<Complex> ControlMatrix(Matrix<Complex> matrixWithoutControls, int controllingQubit);
     }
 }

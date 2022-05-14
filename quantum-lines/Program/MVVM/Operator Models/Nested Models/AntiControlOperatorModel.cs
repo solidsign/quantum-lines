@@ -10,7 +10,7 @@ namespace quantum_lines.Program.Operators
         {
         }
 
-        public override Matrix<Complex> ControlMatrix(Matrix<Complex> matrixWithoutControls)
+        public override Matrix<Complex> ControlMatrix(Matrix<Complex> matrixWithoutControls, int controllingQubit)
         {
             // TODO
             return matrixWithoutControls;
