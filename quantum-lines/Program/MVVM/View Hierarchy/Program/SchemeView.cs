@@ -11,6 +11,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using quantum_lines.Program.Calculation;
 using quantum_lines.Program.Operators;
 
 namespace quantum_lines
@@ -36,10 +37,12 @@ namespace quantum_lines
     public class SchemeViewModel
     {
         private SchemeModel _model;
+        private CalculationHandler _calculationHandler;
 
         public SchemeViewModel()
         {
             _model = new SchemeModel();
+            _calculationHandler = new CalculationHandler(_model);
         }
         
         public void AddInput(QubitInputModel model)
