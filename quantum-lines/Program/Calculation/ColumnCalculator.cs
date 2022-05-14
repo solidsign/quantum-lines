@@ -18,6 +18,8 @@ namespace quantum_lines.Program.Calculation
         public List<Qubit> Calculate()
         {
             List<Qubit> outValues = new List<Qubit>(_inValues);
+            
+            // TODO
 
             return outValues;
         }
