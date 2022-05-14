@@ -62,6 +62,33 @@ namespace quantum_lines
             foreach (var model in models)
             {
                 model.OperatorOnLineUpdated += _model.InvokeSchemeUpdated;
+                model.ValidateModelUpdate = ValidateOperatorUpdate;
+            }
+
+            bool ValidateOperatorUpdate(OperatorModel newOperator, OperatorOnLineModel currentOperator)
+            {
+                if (newOperator.OperatorClass != OperatorClass.Controller) return true;
+                
+                foreach (var operatorOnLineModel in FindLine(currentOperator))
+                {
+                    if (operatorOnLineModel.OperatorModel.OperatorClass == OperatorClass.Controller)
+                        return false;
+                }
+
+                return true;
+            }
+
+            List<OperatorOnLineModel> FindLine(OperatorOnLineModel model)
+            {
+                foreach (var operatorLine in _model.OperatorLines)
+                {
+                    foreach (var operatorOnLineModel in operatorLine)
+                    {
+                        if (operatorOnLineModel == model) return operatorLine;
+                    }
+                }
+
+                throw new KeyNotFoundException();
             }
         }
         
