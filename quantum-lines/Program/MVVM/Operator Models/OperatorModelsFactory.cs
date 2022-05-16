@@ -23,15 +23,15 @@ namespace quantum_lines.Program.Operators
                     return new FixedMatrixOperatorModel(operatorId, new Matrix<Complex>(new Complex[2, 2] { {0, 1}, {1, 0} }), new BitmapImage(new Uri(@"\Picture\OperatorNot.png", UriKind.Relative))); //(матрица ввида(0, 1)/(1, 0)
                 case OperatorId.QFT:
                     return new QFTOperatorModel(operatorId, null);
-                case OperatorId.paulX:
+                case OperatorId.PaulX:
                 // return new(operatorId, new Matrix<Complex>(new Complex[2, 2] { { 0, 1 }, { 1, 0 } }), new BitmapImage(new Uri(@"Picture\PaulXOperatorOnLine.png", UriKind.Relative)));           // матрица вида (0, 1)/ (1, 0)
-                case OperatorId.paulY:
+                case OperatorId.PaulY:
                 // return new(operatorId, new Matrix<Complex>(new Complex[2, 2] { { 0, 1 }, { 1, 0 } }), new BitmapImage(new Uri(@"Picture\PaulYOperatorOnLine.png", UriKind.Relative)));           // (0, -i)/(i 0)
-                case OperatorId.paulZ:
+                case OperatorId.PaulZ:
                 // return new(operatorId, new Matrix<Complex>(new Complex[2, 2] { { 0, 1 }, { 1, 0 } }), new BitmapImage(new Uri(@"Picture\PaulZOperatorOnLine.png", UriKind.Relative)));           // (1, 0) / (0, -1)
-                case OperatorId.phaseS:
+                case OperatorId.PhaseS:
                 //  return new(operatorId, new Matrix<Complex>(new Complex[2, 2] { { 0, 1 }, { 1, 0 } }), new BitmapImage(new Uri(@"Picture\PhaseSOperatorOnLine.png", UriKind.Relative)));         // (1, 0) / (0, -i)
-                case OperatorId.elemP8:
+                case OperatorId.ElemP8:
                     //  return new(operatorId, new Matrix<Complex>(new Complex[2, 2] { { 0, 1 }, { 1, 0 } }), new BitmapImage(new Uri(@"Picture\PaulXOperatorOnLine.png", UriKind.Relative)));      // (1, 0) / (0, e^(i*pi/4))
                 default:
                     return new FixedMatrixOperatorModel(operatorId, null, null);
