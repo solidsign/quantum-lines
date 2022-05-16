@@ -33,19 +33,19 @@ namespace quantum_lines.Program.Operators
                     return new AntiControlOperatorModel(null); // TODO
                 case OperatorId.PaulY:
                     return new FixedMatrixOperatorModel(operatorId,
-                        new Matrix<Complex>(new Complex[2, 2] {{0, 1}, {1, 0}}),
+                        null,
                         new BitmapImage(new Uri(@"\Picture\PaulYOperatorOnLine.png", UriKind.Relative))); // (0, -i)/(i 0) TODO
                 case OperatorId.PaulZ:
                     return new FixedMatrixOperatorModel(operatorId,
-                        new Matrix<Complex>(new Complex[2, 2] {{0, 1}, {1, 0}}),
+                        null,
                         new BitmapImage(new Uri(@"\Picture\PaulZOperatorOnLine.png", UriKind.Relative))); // (1, 0) / (0, -1) TODO
                 case OperatorId.PhaseS:
                     return new FixedMatrixOperatorModel(operatorId,
-                        new Matrix<Complex>(new Complex[2, 2] {{0, 1}, {1, 0}}),
+                        null,
                         new BitmapImage(new Uri(@"\Picture\PhaseSOperatorOnLine.png", UriKind.Relative))); // (1, 0) / (0, -i) TODO
                 case OperatorId.ElemP8:
                     return new FixedMatrixOperatorModel(operatorId,
-                        new Matrix<Complex>(new Complex[2, 2] {{0, 1}, {1, 0}}),
+                        null,
                         null); // (1, 0) / (0, e^(i*pi/4)) TODO
                 default:
                     return new EmptyOperatorModel();
