@@ -4,7 +4,6 @@
     {
         Undefined,
         Hadamard,
-        PaulX,
         PaulY,
         ElemP8,
         PaulZ,

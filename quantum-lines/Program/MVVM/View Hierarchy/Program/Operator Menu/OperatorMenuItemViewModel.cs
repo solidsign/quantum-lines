@@ -9,11 +9,6 @@
             _model = OperatorModelsFactory.Create(id);
         }
 
-        public void OnClick()
-        {
-            
-        }
-
         public OperatorId OperatorId => _model.OperatorId;
     }
 }

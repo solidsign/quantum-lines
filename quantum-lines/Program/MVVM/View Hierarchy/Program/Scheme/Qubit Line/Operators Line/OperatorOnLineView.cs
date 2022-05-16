@@ -19,6 +19,7 @@ namespace quantum_lines.Program.Operators
             _connector = connector;
             _viewModel = new OperatorOnLineViewModel(operatorId, addModel);
             _image = image;
+            ChangeButtonImage();
             image.MouseLeftButtonDown += ButtonOnClick;
         }
 

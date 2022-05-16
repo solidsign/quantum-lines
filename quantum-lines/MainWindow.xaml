@@ -9,7 +9,6 @@
         Title="MainWindow" Height="450" Width="800">
     <Canvas x:Name="CanvasMain" Width="800" Margin="0,0,0,-6">
         <ToggleButton x:Name="hadamardMenuButton" Content="Hadamar" Canvas.Left="170" Canvas.Top="34" Height="40" Width="57"/>
-        <ToggleButton x:Name="paulXMenuButton" Content="X" Canvas.Left="175" Canvas.Top="90" Height="40" Width="57"/>
         <ToggleButton x:Name="paulYMenuButton" Content="Y" Canvas.Left="241" Canvas.Top="90" Height="40" Width="58"/>
         <ToggleButton x:Name="paulZMenuButton" Content="Z" Canvas.Left="304" Canvas.Top="90" Height="40" Width="56"/>
         <ToggleButton x:Name="phaseSMenuButton" Content="S" Canvas.Left="110" Canvas.Top="34" Height="40" Width="57"/>

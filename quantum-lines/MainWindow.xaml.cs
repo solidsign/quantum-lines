@@ -37,7 +37,6 @@ namespace quantum_lines
             {
                 {OperatorId.Not, notMenuButton},
                 {OperatorId.Hadamard, hadamardMenuButton},
-                {OperatorId.PaulX, paulXMenuButton},
                 {OperatorId.PaulY, paulYMenuButton},
                 {OperatorId.PaulZ, paulZMenuButton},
                 {OperatorId.PhaseS, phaseSMenuButton},
@@ -52,7 +51,7 @@ namespace quantum_lines
         {
             var images = new List<(OperatorId id, Image image)>
             {
-                (OperatorId.Empty, firstQBitImage),
+                (OperatorId.PaulY, firstQBitImage),
                 (OperatorId.Empty, secondQBitImage),
                 (OperatorId.Empty, thirdQBitImage),
                 (OperatorId.Empty, fourthQBitImage),

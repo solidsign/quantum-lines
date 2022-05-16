@@ -15,6 +15,10 @@
     <None Remove="Picture\myPhoto.png" />
     <None Remove="Picture\OperatorHadamar.png" />
     <None Remove="Picture\OperatorNot.png" />
+    <None Remove="Picture\PaulXOperatorOnLine.png" />
+    <None Remove="Picture\PaulYOperatorOnLine.png" />
+    <None Remove="Picture\PaulZOperatorOnLine.png" />
+    <None Remove="Picture\PhaseSOperatorOnLine.png" />
     <None Remove="Picture\pngwing.com.png" />
     <None Remove="Picture\Безымянный.png" />
     <None Remove="pngwing.com.png" />
@@ -31,6 +35,10 @@
     <Resource Include="Picture\myPhoto.png" />
     <Resource Include="Picture\OperatorHadamar.png" />
     <Resource Include="Picture\OperatorNot.png" />
+    <Resource Include="Picture\PaulXOperatorOnLine.png" />
+    <Resource Include="Picture\PaulYOperatorOnLine.png" />
+    <Resource Include="Picture\PaulZOperatorOnLine.png" />
+    <Resource Include="Picture\PhaseSOperatorOnLine.png" />
     <Resource Include="Picture\pngwing.com.png" />
     <Resource Include="Picture\qbit.png" />
     <Resource Include="Picture\Безымянный.png" />
