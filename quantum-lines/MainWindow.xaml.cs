@@ -37,11 +37,11 @@ namespace quantum_lines
             {
                 {OperatorId.Not, notMenuButton},
                 {OperatorId.Hadamard, hadamardMenuButton},
-                {OperatorId.paulX, paulXMenuButton},
-                {OperatorId.paulY, paulYMenuButton},
-                {OperatorId.paulZ, paulZMenuButton},
-                {OperatorId.phaseS, phaseSMenuButton},
-                {OperatorId.elemP8, elemP8MenuButton},
+                {OperatorId.PaulX, paulXMenuButton},
+                {OperatorId.PaulY, paulYMenuButton},
+                {OperatorId.PaulZ, paulZMenuButton},
+                {OperatorId.PhaseS, phaseSMenuButton},
+                {OperatorId.ElemP8, elemP8MenuButton},
                 {OperatorId.QFT, QFTMenuButton}
             };
             return buttons;
