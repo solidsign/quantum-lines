@@ -24,7 +24,7 @@ namespace quantum_lines
     public partial class MainWindow : Window
     {
         private ProgramView _programView;
-        
+
         public MainWindow()
         {
             InitializeComponent();
@@ -37,12 +37,17 @@ namespace quantum_lines
             {
                 {OperatorId.Not, notMenuButton},
                 {OperatorId.Hadamard, hadamardMenuButton},
+                {OperatorId.paulX, paulXMenuButton},
+                {OperatorId.paulY, paulYMenuButton},
+                {OperatorId.paulZ, paulZMenuButton},
+                {OperatorId.phaseS, phaseSMenuButton},
+                {OperatorId.elemP8, elemP8MenuButton},
                 {OperatorId.QFT, QFTMenuButton}
             };
             return buttons;
         }
 
-        
+
         private List<QubitLineArguments> CreateQubitLines()
         {
             var images = new List<(OperatorId id, Image image)>
@@ -53,8 +58,8 @@ namespace quantum_lines
                 (OperatorId.Empty, fourthQBitImage),
                 (OperatorId.Empty, fifthQBitImage),
             };
-            List<QubitLineArguments> qubitLineArguments = new List<QubitLineArguments>();   
-            qubitLineArguments.Add(new QubitLineArguments(qubitBasisStateButton, QubitBasisState.Zero, images, qubitResult)); 
+            List<QubitLineArguments> qubitLineArguments = new List<QubitLineArguments>();
+            qubitLineArguments.Add(new QubitLineArguments(qubitBasisStateButton, QubitBasisState.Zero, images, qubitResult));
             return qubitLineArguments;
         }
 

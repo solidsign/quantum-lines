@@ -9,8 +9,13 @@
         Title="MainWindow" Height="450" Width="800">
     <Canvas x:Name="CanvasMain" Width="800" Margin="0,0,0,-6">
         <ToggleButton x:Name="hadamardMenuButton" Content="Hadamar" Canvas.Left="170" Canvas.Top="34" Height="40" Width="57"/>
-        <ToggleButton x:Name="notMenuButton" Content="Not" Canvas.Left="278" Canvas.Top="34" Height="40" Width="70" />
-        <ToggleButton x:Name="QFTMenuButton"  Content="QFTMenuButton" Canvas.Left="385" Canvas.Top="34" Height="40" Width="75" />
+        <ToggleButton x:Name="paulXMenuButton" Content="X" Canvas.Left="175" Canvas.Top="90" Height="40" Width="57"/>
+        <ToggleButton x:Name="paulYMenuButton" Content="Y" Canvas.Left="241" Canvas.Top="90" Height="40" Width="58"/>
+        <ToggleButton x:Name="paulZMenuButton" Content="Z" Canvas.Left="304" Canvas.Top="90" Height="40" Width="56"/>
+        <ToggleButton x:Name="phaseSMenuButton" Content="S" Canvas.Left="110" Canvas.Top="34" Height="40" Width="57"/>
+        <ToggleButton x:Name="elemP8MenuButton" Content="T" Canvas.Left="113" Canvas.Top="90" Height="40" Width="57"/>
+        <ToggleButton x:Name="notMenuButton" Content="Not" Canvas.Left="235" Canvas.Top="34" Height="40" Width="70" />
+        <ToggleButton x:Name="QFTMenuButton"  Content="QFTMenuButton" Canvas.Left="318" Canvas.Top="34" Height="40" Width="75" />
         <Button x:Name="qubitBasisStateButton" Content="|0&gt;" Height="28" Width="28" Canvas.Top="187" Panel.ZIndex="1"/>
         <Path Stroke="Black" StrokeThickness="1" >
             <Path.Data>
