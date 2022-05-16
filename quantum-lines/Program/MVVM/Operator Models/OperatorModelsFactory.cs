@@ -27,6 +27,17 @@ namespace quantum_lines.Program.Operators
                     return new ControlOperatorModel(null); // TODO
                 case OperatorId.AntiControl:
                     return new AntiControlOperatorModel(null); // TODO
+                case OperatorId.paulX:
+                // return new(operatorId, new Matrix<Complex>(new Complex[2, 2] { { 0, 1 }, { 1, 0 } }), new BitmapImage(new Uri(@"Picture\PaulXOperatorOnLine.png", UriKind.Relative)));           // матрица вида (0, 1)/ (1, 0)
+                case OperatorId.paulY:
+                // return new(operatorId, new Matrix<Complex>(new Complex[2, 2] { { 0, 1 }, { 1, 0 } }), new BitmapImage(new Uri(@"Picture\PaulYOperatorOnLine.png", UriKind.Relative)));           // (0, -i)/(i 0)
+                case OperatorId.paulZ:
+                // return new(operatorId, new Matrix<Complex>(new Complex[2, 2] { { 0, 1 }, { 1, 0 } }), new BitmapImage(new Uri(@"Picture\PaulZOperatorOnLine.png", UriKind.Relative)));           // (1, 0) / (0, -1)
+                case OperatorId.phaseS:
+                //  return new(operatorId, new Matrix<Complex>(new Complex[2, 2] { { 0, 1 }, { 1, 0 } }), new BitmapImage(new Uri(@"Picture\PhaseSOperatorOnLine.png", UriKind.Relative)));         // (1, 0) / (0, -i)
+                case OperatorId.elemP8:
+                    //  return new(operatorId, new Matrix<Complex>(new Complex[2, 2] { { 0, 1 }, { 1, 0 } }), new BitmapImage(new Uri(@"Picture\PaulXOperatorOnLine.png", UriKind.Relative)));      // (1, 0) / (0, e^(i*pi/4))
+
                 default:
                     return new EmptyOperatorModel();
             }
