@@ -72,5 +72,10 @@ namespace quantum_lines.Program.Operators
         {
             SizeDependentIndex = index;
         }
+
+        public void UpdateSizeDependentIndexFinished()
+        {
+            OperatorOnLineUpdated?.Invoke();
+        }
     }
 }

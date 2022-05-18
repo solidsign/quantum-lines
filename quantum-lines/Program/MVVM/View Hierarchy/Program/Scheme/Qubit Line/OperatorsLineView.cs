@@ -24,10 +24,6 @@ namespace quantum_lines
         {
             var operatorModels = new List<OperatorOnLineModel>(images.Count);
             _views = new List<OperatorOnLineView>();
-            foreach (var i in images)
-            {
-                
-            }
             for (var i = 0; i < images.Count; i++)
             {
                 _views.Add(new OperatorOnLineView(images[i].id, images[i].image, upButtons[i], downButtons[i], connector, AddModel));
@@ -35,6 +31,14 @@ namespace quantum_lines
             addLine(operatorModels);
             
             void AddModel(OperatorOnLineModel model) => operatorModels.Add(model);
+        }
+
+        public void InitAddButtons(OperatorsLineView? up, OperatorsLineView? down)
+        {
+            for (var i = 0; i < _views.Count; i++)
+            {
+                _views[i].InitAddButtons(up?._views[i], down?._views[i]);
+            }
         }
 
         public bool Equals(List<Image>? other)

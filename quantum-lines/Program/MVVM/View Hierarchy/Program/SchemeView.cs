@@ -32,11 +32,24 @@ namespace quantum_lines
             {
                 _qubitLines.Add(new QubitLineView(qubitLine, menuSchemeConnector, _viewModel.AddResult, _viewModel.AddInput, _viewModel.AddLine));
             }
+            
+            for (var i = 0; i < _qubitLines.Count; i++)
+            {
+                _qubitLines[i].InitAddButtons(
+                    i - 1 >= 0 ? _qubitLines[i - 1] : null,
+                    i + 1 < _qubitLines.Count ? _qubitLines[i + 1] : null);
+            }
         }
 
         public void AddLine(QubitLineArguments args)
         {
             _qubitLines.Add(new QubitLineView(args, _menuSchemeConnector, _viewModel.AddResult, _viewModel.AddInput, _viewModel.AddLine));
+            for (var i = 0; i < _qubitLines.Count; i++)
+            {
+                _qubitLines[i].InitAddButtons(
+                    i - 1 >= 0 ? _qubitLines[i - 1] : null,
+                    i + 1 < _qubitLines.Count ? _qubitLines[i + 1] : null);
+            }
         }
 
         public void RemoveLine()
@@ -44,6 +57,12 @@ namespace quantum_lines
             var last = _qubitLines.Last();
             _qubitLines.Remove(last);
             last.Dispose();
+            for (var i = 0; i < _qubitLines.Count; i++)
+            {
+                _qubitLines[i].InitAddButtons(
+                    i - 1 >= 0 ? _qubitLines[i - 1] : null,
+                    i + 1 < _qubitLines.Count ? _qubitLines[i + 1] : null);
+            }
         }
     }
 
