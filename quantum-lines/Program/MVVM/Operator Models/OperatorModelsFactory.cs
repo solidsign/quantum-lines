@@ -7,6 +7,8 @@ using System.Threading.Tasks;
 using System.Windows.Media.Imaging;
 using MatrixDotNet;
 
+
+
 namespace quantum_lines.Program.Operators
 {
     public static class OperatorModelsFactory
@@ -26,38 +28,43 @@ namespace quantum_lines.Program.Operators
                         new Matrix<Complex>(new Complex[2, 2] {{0, 1}, {1, 0}}),
                         new BitmapImage(new Uri(@"\Picture\OperatorNot.png", UriKind.Relative))); //(матрица ввида(0, 1)/(1, 0)
                 case OperatorId.QFT:
-                    return new QFTOperatorModel(null, 1); // TODO картинка
+                    return new QFTOperatorModel(new BitmapImage(new Uri(@"\Picture\QFTOperator.png", UriKind.Relative)), 1); 
                 case OperatorId.Control:
-                    return new ControlOperatorModel(null); // TODO картинка
+                    return new ControlOperatorModel(new BitmapImage(new Uri(@"\Picture\ControlOperator.png", UriKind.Relative))); 
                 case OperatorId.AntiControl:
-                    return new AntiControlOperatorModel(null); // TODO картинка
+                    return new AntiControlOperatorModel(new BitmapImage(new Uri(@"\Picture\AntiControlOperator.png", UriKind.Relative))); 
                 case OperatorId.PaulY:
                     return new FixedMatrixOperatorModel(operatorId,
-                        null,
-                        new BitmapImage(new Uri(@"\Picture\PaulYOperatorOnLine.png", UriKind.Relative))); // (0, -i)/(i 0) TODO матрица
+                        new Matrix<Complex>(new Complex[2, 2] {{0, new Complex(0, -1)}, { new Complex(0, 1), 0 }}),
+                        new BitmapImage(new Uri(@"\Picture\PaulYOperatorOnLine.png", UriKind.Relative))); // (0, -i)/(i 0)
                 case OperatorId.PaulZ:
                     return new FixedMatrixOperatorModel(operatorId,
-                        null,
-                        new BitmapImage(new Uri(@"\Picture\PaulZOperatorOnLine.png", UriKind.Relative))); // (1, 0) / (0, -1) TODO матрица
+                        new Matrix<Complex>(new Complex[2, 2] { {1, 0}, {0, -1} }),
+                        new BitmapImage(new Uri(@"\Picture\PaulZOperatorOnLine.png", UriKind.Relative))); // (1, 0) / (0, -1) 
                 case OperatorId.PhaseS:
                     return new FixedMatrixOperatorModel(operatorId,
-                        null,
-                        new BitmapImage(new Uri(@"\Picture\PhaseSOperatorOnLine.png", UriKind.Relative))); // (1, 0) / (0, -i) TODO матрица
+                         new Matrix<Complex>(new Complex[2, 2] { {1, 0}, {0, new Complex(0, -1)} }),
+                        new BitmapImage(new Uri(@"\Picture\PhaseSOperatorOnLine.png", UriKind.Relative))); // (1, 0) / (0, -i) 
                 case OperatorId.ElemP8:
                     return new FixedMatrixOperatorModel(operatorId,
-                        null,
-                        null); // (1, 0) / (0, e^(i*pi/4)) TODO картинка и матрица
+                        new Complex[2, 2] { {1, 0}, { 0, new Complex(Math.Cos(3.1415926535 / 4), Math.Sin(3.1415926535 / 4))} },
+                        new BitmapImage(new Uri(@"\Picture\PI8Operator.png", UriKind.Relative))); // (1, 0) / (0, e^(i*pi/4)) 
                 case OperatorId.PostselectOff:
                     return new FixedMatrixOperatorModel(operatorId,
                         new Matrix<Complex>(new Complex[2, 2] {{1, 0}, {0, 0}}),
-                        null); // TODO картинка
+                         new BitmapImage(new Uri(@"\Picture\PostSelectOFFOperator.png", UriKind.Relative))); 
                 case OperatorId.PostselectOn:
                     return new FixedMatrixOperatorModel(operatorId,
                         new Matrix<Complex>(new Complex[2, 2] {{0, 0}, {0, 1}}),
-                        null); // TODO картинка
+                         new BitmapImage(new Uri(@"\Picture\PostSelectONOperator.png", UriKind.Relative))); 
                 default:
                     return new EmptyOperatorModel();
             }
+        }
+
+        private static object pow(double v1, Complex complex, int v2)
+        {
+            throw new NotImplementedException();
         }
 
         public static SizeDependentOperatorModel Create(OperatorId id, int index)
