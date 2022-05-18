@@ -35,6 +35,7 @@ namespace quantum_lines
 
         public bool Equals(List<Image>? other)
         {
+            if (other == null) throw new ArgumentException();
             return _views.TrueForAll(x => other.Any(i => x.Equals(i)));
         }
 

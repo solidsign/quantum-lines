@@ -32,6 +32,7 @@ namespace quantum_lines
 
         public bool Equals(QubitLineArguments? other)
         {
+            if (other == null) throw new ArgumentException();
             return
                 _qubitResult.Equals(other.QubitResultLabel) &&
                 _startValue.Equals(other.StartValueButton) &&

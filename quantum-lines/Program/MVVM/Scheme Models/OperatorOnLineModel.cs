@@ -10,7 +10,7 @@ namespace quantum_lines.Program.Operators
         public OperatorId OperatorId => OperatorModel.OperatorId;
         public event Action? OperatorOnLineUpdated;
 
-        public Func<OperatorModel, OperatorOnLineModel, bool> ValidateModelUpdate;
+        public Func<OperatorModel, OperatorOnLineModel, bool>? ValidateModelUpdate;
 
         public OperatorOnLineModel(OperatorId operatorId)
         {
@@ -20,7 +20,7 @@ namespace quantum_lines.Program.Operators
         public void UpdateModel(OperatorId newModelId)
         {
             var newModel = OperatorModelsFactory.Create(newModelId);
-            if (!ValidateModelUpdate(newModel, this))
+            if (ValidateModelUpdate != null && !ValidateModelUpdate(newModel, this))
             {
                 // TODO: когда будут кнопки контроллеров - проверить, что ограничение на количество контроллеров отрабатывает корректно
                 // TODO: вывести сообщение об ошибке

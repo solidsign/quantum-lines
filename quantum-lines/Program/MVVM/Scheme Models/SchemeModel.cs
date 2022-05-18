@@ -13,7 +13,7 @@ namespace quantum_lines
             OperatorLines = new List<List<OperatorOnLineModel>>();
         }
 
-        public event Action SchemeUpdated;
+        public event Action? SchemeUpdated;
         
         public void InvokeSchemeUpdated()
         {
