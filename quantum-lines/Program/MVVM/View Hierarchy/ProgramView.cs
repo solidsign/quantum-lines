@@ -19,8 +19,14 @@ namespace quantum_lines.Program
             _operatorsMenu = new OperatorsMenuView(operatorsMenuButtons, menuSchemeConnector);
         }
 
+        public void RemoveLine()
+        {
+            // TODO
+        }
 
-
-
+        public void AddLine(QubitLineArguments args)
+        {
+            // TODO
+        }
     }
 }

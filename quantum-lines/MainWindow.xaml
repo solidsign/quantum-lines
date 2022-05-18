@@ -32,7 +32,9 @@
                     <ColumnDefinition Width="640"/>
                     <ColumnDefinition Width="80"/>
                 </Grid.ColumnDefinitions>
-            </Grid>    
+            </Grid>
         </ScrollViewer>
+        <Button x:Name="addLineButton" Content="Добавить кубит" Canvas.Left="677" Canvas.Top="44" Click="addLineButton_Click"/>
+        <Button x:Name="removeLineButton" Content="Удалить кубит" Canvas.Left="681" Canvas.Top="75" Click="removeLineButton_Click"/>
     </Canvas>
 </Window>

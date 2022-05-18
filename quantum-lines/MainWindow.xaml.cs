@@ -24,11 +24,17 @@ namespace quantum_lines
     public partial class MainWindow : Window
     {
         private const int QUBIT_LINE_SIZE = 10;
+        private const int QUBIT_LINES_AMOUNT = 8;
+        private int qubitLinesAmount;
         private ProgramView _programView;
+
+        private List<QubitLineComponents> _qubitLines;
 
         public MainWindow()
         {
             InitializeComponent();
+            qubitLinesAmount = 0;
+            _qubitLines = new List<QubitLineComponents>(QUBIT_LINES_AMOUNT);
             _programView = new ProgramView(CreateMenuButtons(), CreateQubitLines()); // <- от сюда по сути и идет инициализация всей приложухи
         }
 
@@ -49,26 +55,29 @@ namespace quantum_lines
 
         private List<QubitLineArguments> CreateQubitLines()
         {
-            var res = new List<QubitLineArguments>(QUBIT_LINE_SIZE);
-            for (int i = 0; i < QUBIT_LINE_SIZE; i++)
+            var res = new List<QubitLineArguments>(QUBIT_LINES_AMOUNT);
+            for (int i = 0; i < QUBIT_LINES_AMOUNT; i++)
             {
                 res.Add(CreateQubitLine(i));
             }
 
+            qubitLinesAmount = res.Count;
             return res;
         }
 
         private QubitLineArguments CreateQubitLine(int index)
         {
-            AddLine(index);
-            var images = AddOperatorImages(index);
+            var line = AddLine(index);
+            var (images, stackPanel) = AddOperatorImages(index);
             var qubitBasisStateButton = QubitBasisStateButton(index);
-            var qubitResult = AddQubitResult(index);
+            var (qubitResult, qubitResultImage) = AddQubitResult(index);
 
-            return new QubitLineArguments(qubitBasisStateButton, QubitBasisState.Zero, images, qubitResult);
+            var qubitLineArguments = new QubitLineArguments(qubitBasisStateButton, QubitBasisState.Zero, images, qubitResult);
+            _qubitLines.Add(new QubitLineComponents(qubitLineArguments, line, qubitResultImage, stackPanel));
+            return qubitLineArguments;
         }
 
-        private List<(OperatorId id, Image image)> AddOperatorImages(int index)
+        private (List<(OperatorId id, Image image)>, StackPanel) AddOperatorImages(int index)
         {
             var images = new List<(OperatorId id, Image image)>(QUBIT_LINE_SIZE);
 
@@ -92,10 +101,10 @@ namespace quantum_lines
             }
 
             schemeGrid.Children.Add(stackPanel);
-            return images;
+            return (images, stackPanel);
         }
 
-        private Label AddQubitResult(int index)
+        private (Label, Image) AddQubitResult(int index)
         {
             var qubitResultLabel = new Label()
             {
@@ -121,7 +130,7 @@ namespace quantum_lines
             schemeGrid.Children.Add(qubitResultLabel);
             schemeGrid.Children.Add(qubitResultBackground);
 
-            return qubitResultLabel;
+            return (qubitResultLabel, qubitResultBackground);
         }
 
         private Button QubitBasisStateButton(int index)
@@ -138,7 +147,7 @@ namespace quantum_lines
             return qubitBasisStateButton;
         }
 
-        private void AddLine(int index)
+        private Line AddLine(int index)
         {
             var line = new Line
             {
@@ -149,6 +158,44 @@ namespace quantum_lines
             Grid.SetRow(line, index);
             Grid.SetColumnSpan(line, 3);
             schemeGrid.Children.Add(line);
+            return line;
+        }
+
+        private void addLineButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (qubitLinesAmount == 8)
+            {
+                MessageBox.Show("Достигнуто максимальное число кубит - 8");
+                return;
+            }
+            
+            _programView.AddLine(CreateQubitLine(qubitLinesAmount));
+            qubitLinesAmount++;
+        }
+
+        private void removeLineButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (qubitLinesAmount == 1)
+            {
+                MessageBox.Show("Достигнуто минимальное число кубит - 1");
+                return;
+            }
+            
+            _programView.RemoveLine();
+            RemoveQubitLine();
+            qubitLinesAmount--;
+        }
+
+        private void RemoveQubitLine()
+        {
+            var last = _qubitLines.Last();
+            schemeGrid.Children.Remove(last.Line);
+            schemeGrid.Children.Remove(last.QubitResultLabel);
+            schemeGrid.Children.Remove(last.ResultBackground);
+            schemeGrid.Children.Remove(last.StartValueButton);
+            schemeGrid.Children.Remove(last.OperatorsLineImages);
+
+            _qubitLines.Remove(last);
         }
     }
 }

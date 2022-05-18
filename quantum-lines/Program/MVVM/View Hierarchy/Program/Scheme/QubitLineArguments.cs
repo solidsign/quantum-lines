@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Windows.Controls;
+using System.Windows.Shapes;
 
 namespace quantum_lines
 {
@@ -19,4 +20,24 @@ namespace quantum_lines
             
         }
     }
+    
+    public class QubitLineComponents
+    {
+        public readonly StackPanel OperatorsLineImages;
+        public readonly Button StartValueButton;
+        public readonly Label QubitResultLabel;
+        public readonly Line Line;
+        public readonly Image ResultBackground;
+
+        public QubitLineComponents(QubitLineArguments args, Line line, Image resultBackground, StackPanel operatorsLineImages)
+        {
+            QubitResultLabel = args.QubitResultLabel;
+            StartValueButton = args.StartValueButton;
+            OperatorsLineImages = operatorsLineImages;
+            Line = line;
+            ResultBackground = resultBackground;
+        }
+    }
+    
+    
 }
