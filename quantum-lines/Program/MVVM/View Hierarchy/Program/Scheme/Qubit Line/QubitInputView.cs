@@ -15,7 +15,7 @@ using System.Windows.Shapes;
 
 namespace quantum_lines
 {
-    public class QubitInputView : IEquatable<Button>
+    public class QubitInputView : IEquatable<Button>, IDisposable
     {
         private Button _currentValueButton;
         
@@ -40,9 +40,15 @@ namespace quantum_lines
         {
             return _currentValueButton == other;
         }
+
+        public void Dispose()
+        {
+            _currentValueButton.Click -= ChangeValueButtonOnClick;
+            _viewModel.Dispose();
+        }
     }
 
-    public class QubitInputViewModel
+    public class QubitInputViewModel : IDisposable
     {
         private QubitInputModel _model;
         private QubitBasisState _basisState;
@@ -60,6 +66,11 @@ namespace quantum_lines
             n %= Enum.GetValues(typeof(QubitBasisState)).Length;
             _basisState = (QubitBasisState) n;
             _model.UpdateValue(_basisState);
+        }
+
+        public void Dispose()
+        {
+            _model.Dispose();
         }
     }
 }

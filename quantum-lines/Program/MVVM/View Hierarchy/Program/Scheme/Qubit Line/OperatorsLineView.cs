@@ -17,7 +17,7 @@ using quantum_lines.Program.Operators;
 
 namespace quantum_lines
 {
-    public class OperatorsLineView : IEquatable<List<Image>>
+    public class OperatorsLineView : IEquatable<List<Image>>, IDisposable
     {
         private List<OperatorOnLineView> _views;
         public OperatorsLineView(List<(OperatorId id, Image image)> images, MenuSchemeConnector connector, Action<List<OperatorOnLineModel>> addLine)
@@ -36,6 +36,14 @@ namespace quantum_lines
         public bool Equals(List<Image>? other)
         {
             return _views.TrueForAll(x => other.Any(i => x.Equals(i)));
+        }
+
+        public void Dispose()
+        {
+            foreach (var view in _views)
+            {
+                view.Dispose();
+            }
         }
     }
 }

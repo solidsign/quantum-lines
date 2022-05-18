@@ -21,9 +21,11 @@ namespace quantum_lines
     {
         private List<QubitLineView> _qubitLines;
         private SchemeViewModel _viewModel;
+        private MenuSchemeConnector _menuSchemeConnector;
 
         public SchemeView(MenuSchemeConnector menuSchemeConnector, List<QubitLineArguments> qubitLines)
         {
+            _menuSchemeConnector = menuSchemeConnector;
             _viewModel = new SchemeViewModel();
             _qubitLines = new List<QubitLineView>();
             foreach (var qubitLine in qubitLines)
@@ -34,13 +36,14 @@ namespace quantum_lines
 
         public void AddLine(QubitLineArguments args)
         {
-            var line = _qubitLines.Find(x => x.Equals(args));
-            _qubitLines.Remove(line);
+            _qubitLines.Add(new QubitLineView(args, _menuSchemeConnector, _viewModel.AddResult, _viewModel.AddInput, _viewModel.AddLine));
         }
 
         public void RemoveLine()
         {
-            // TODO
+            var last = _qubitLines.Last();
+            _qubitLines.Remove(last);
+            last.Dispose();
         }
     }
 
@@ -100,26 +103,6 @@ namespace quantum_lines
 
                 throw new KeyNotFoundException();
             }
-        }
-        
-        public void RemoveInput(QubitInputModel model)
-        {
-            model.ValueUpdated -= _model.InvokeSchemeUpdated;
-            _model.Inputs.Remove(model);
-        }
-
-        public void RemoveResult(QubitResultModel model)
-        {
-            _model.Results.Remove(model);
-        }
-
-        public void RemoveLine(List<OperatorOnLineModel> models)
-        {
-            foreach (var model in models)
-            {
-                model.OperatorOnLineUpdated -= _model.InvokeSchemeUpdated;
-            }
-            _model.OperatorLines.Remove(models);
         }
     }
 }

@@ -3,12 +3,12 @@ using System.Windows.Media.Imaging;
 
 namespace quantum_lines.Program.Operators
 {
-    public class OperatorOnLineModel
+    public class OperatorOnLineModel : IDisposable
     {
         public OperatorModel OperatorModel { get; private set; }
         public BitmapImage Image => OperatorModel.Image;
         public OperatorId OperatorId => OperatorModel.OperatorId;
-        public event Action OperatorOnLineUpdated;
+        public event Action? OperatorOnLineUpdated;
 
         public Func<OperatorModel, OperatorOnLineModel, bool> ValidateModelUpdate;
 
@@ -29,6 +29,11 @@ namespace quantum_lines.Program.Operators
 
             OperatorModel = newModel;
             OperatorOnLineUpdated?.Invoke();
+        }
+
+        public void Dispose()
+        {
+            OperatorOnLineUpdated = null;
         }
     }
 }

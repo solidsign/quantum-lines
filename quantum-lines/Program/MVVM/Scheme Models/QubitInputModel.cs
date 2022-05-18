@@ -2,10 +2,10 @@ using System;
 
 namespace quantum_lines
 {
-    public class QubitInputModel
+    public class QubitInputModel : IDisposable
     {
         public Qubit StartQubitValue { get; private set; }
-        public event Action ValueUpdated;
+        public event Action? ValueUpdated;
 
         public QubitInputModel(QubitBasisState startQubitValue)
         {
@@ -16,6 +16,11 @@ namespace quantum_lines
         {
             StartQubitValue = new Qubit(state);
             ValueUpdated?.Invoke();
+        }
+
+        public void Dispose()
+        {
+            ValueUpdated = null;
         }
     }
 }

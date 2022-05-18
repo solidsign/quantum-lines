@@ -17,7 +17,7 @@ using quantum_lines.Program.Operators;
 
 namespace quantum_lines
 {
-    public class QubitLineView : IEquatable<QubitLineArguments>
+    public class QubitLineView : IEquatable<QubitLineArguments>, IDisposable
     {
         private QubitInputView _startValue;
         private OperatorsLineView _operatorsLine;
@@ -36,6 +36,13 @@ namespace quantum_lines
                 _qubitResult.Equals(other.QubitResultLabel) &&
                 _startValue.Equals(other.StartValueButton) &&
                 _operatorsLine.Equals(other.OperatorsLineImages.Select(x => x.Item2).ToList());
+        }
+
+        public void Dispose()
+        {
+            _startValue.Dispose();
+            _operatorsLine.Dispose();
+            _qubitResult.Dispose();
         }
     }
 }

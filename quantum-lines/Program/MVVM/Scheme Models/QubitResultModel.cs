@@ -2,7 +2,7 @@ using System;
 
 namespace quantum_lines
 {
-    public class QubitResultModel
+    public class QubitResultModel : IDisposable
     {
         public Qubit Value { get; private set; }
 
@@ -12,11 +12,16 @@ namespace quantum_lines
             ResultUpdated?.Invoke();
         }
 
-        public event Action ResultUpdated; 
+        public event Action? ResultUpdated; 
         
         public QubitResultModel()
         {
             Value = new Qubit(QubitBasisState.Zero);
+        }
+
+        public void Dispose()
+        {
+            ResultUpdated = null;
         }
     }
 }

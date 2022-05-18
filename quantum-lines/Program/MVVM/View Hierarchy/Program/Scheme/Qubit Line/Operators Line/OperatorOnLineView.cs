@@ -9,7 +9,7 @@ using System.Windows.Media.Imaging;
 
 namespace quantum_lines.Program.Operators
 {
-    public class OperatorOnLineView : IEquatable<Image>
+    public class OperatorOnLineView : IEquatable<Image>, IDisposable
     {
         private OperatorOnLineViewModel _viewModel;
         private MenuSchemeConnector _connector;
@@ -38,9 +38,15 @@ namespace quantum_lines.Program.Operators
         {
             return _image == other;
         }
+
+        public void Dispose()
+        {
+            _image.MouseLeftButtonDown -= ButtonOnClick;
+            _viewModel.Dispose();
+        }
     }
 
-    public class OperatorOnLineViewModel
+    public class OperatorOnLineViewModel : IDisposable
     {
         private OperatorOnLineModel _model;
         
@@ -56,6 +62,11 @@ namespace quantum_lines.Program.Operators
         public void UpdateModel(OperatorId newModel)
         {
             _model.UpdateModel(newModel);
+        }
+
+        public void Dispose()
+        {
+            _model.Dispose();
         }
     }
 }
