@@ -10,6 +10,11 @@ namespace quantum_lines.Program.Operators
         {
         }
 
-        public abstract Matrix<Complex> ControlMatrix(Matrix<Complex> matrixWithoutControls, int controllingQubit);
+        /// <summary>
+        /// Устанавливает последний кубит контрольным
+        /// </summary>
+        /// <param name="matrixWithoutControls"></param>
+        /// <returns></returns>
+        public abstract Matrix<Complex> ControlMatrix(Matrix<Complex> matrixWithoutControls);
     }
 }

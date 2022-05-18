@@ -12,6 +12,8 @@
         QFT,
         Empty,
         Control,
-        AntiControl
+        AntiControl,
+        PostselectOn,
+        PostselectOff,
     }
 }

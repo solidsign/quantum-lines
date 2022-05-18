@@ -47,6 +47,14 @@ namespace quantum_lines.Program.Operators
                     return new FixedMatrixOperatorModel(operatorId,
                         null,
                         null); // (1, 0) / (0, e^(i*pi/4)) TODO
+                case OperatorId.PostselectOff:
+                    return new FixedMatrixOperatorModel(operatorId,
+                        new Matrix<Complex>(new Complex[2, 2] {{1, 0}, {0, 0}}),
+                        null); // TODO
+                case OperatorId.PostselectOn:
+                    return new FixedMatrixOperatorModel(operatorId,
+                        new Matrix<Complex>(new Complex[2, 2] {{0, 0}, {0, 1}}),
+                        null); // TODO
                 default:
                     return new EmptyOperatorModel();
             }
