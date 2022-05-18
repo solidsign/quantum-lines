@@ -4,16 +4,10 @@ using MatrixDotNet;
 
 namespace quantum_lines.Program.Operators
 {
-    public class QFTOperatorModel : OperatorModel
+    public class QFTOperatorModel : SizeDependentOperatorModel
     {
-        public QFTOperatorModel(BitmapImage image) : base(OperatorId.QFT, OperatorClass.QubitNumberParameteredMatrix, image)
+        public QFTOperatorModel(BitmapImage image, int index) : base(OperatorId.QFT, image, index)
         {
-        }
-
-        public Matrix<Complex> GetMatrix(int n)
-        {
-            // TODO
-            return null;
         }
     }
 }

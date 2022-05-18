@@ -4,7 +4,7 @@
     {
         None,
         FixedMatrix,
-        QubitNumberParameteredMatrix,
+        SizeDependentMatrix,
         Controller
     }
 }

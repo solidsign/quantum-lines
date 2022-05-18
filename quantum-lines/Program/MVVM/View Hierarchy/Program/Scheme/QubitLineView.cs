@@ -27,7 +27,7 @@ namespace quantum_lines
         {
             _qubitResult = new QubitResultView(args.QubitResultLabel, addResult);
             _startValue = new QubitInputView(args.StartValue, args.StartValueButton, addInput);
-            _operatorsLine = new OperatorsLineView(args.OperatorsLineImages, connector, addLine);
+            _operatorsLine = new OperatorsLineView(args.OperatorsLineImages, args.UpButtons, args.DownButtons, connector, addLine);
         }
 
         public bool Equals(QubitLineArguments? other)

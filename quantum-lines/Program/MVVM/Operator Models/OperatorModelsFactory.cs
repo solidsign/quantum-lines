@@ -26,37 +26,48 @@ namespace quantum_lines.Program.Operators
                         new Matrix<Complex>(new Complex[2, 2] {{0, 1}, {1, 0}}),
                         new BitmapImage(new Uri(@"\Picture\OperatorNot.png", UriKind.Relative))); //(матрица ввида(0, 1)/(1, 0)
                 case OperatorId.QFT:
-                    return new QFTOperatorModel(null); // TODO
+                    return new QFTOperatorModel(null, 1); // TODO картинка
                 case OperatorId.Control:
-                    return new ControlOperatorModel(null); // TODO
+                    return new ControlOperatorModel(null); // TODO картинка
                 case OperatorId.AntiControl:
-                    return new AntiControlOperatorModel(null); // TODO
+                    return new AntiControlOperatorModel(null); // TODO картинка
                 case OperatorId.PaulY:
                     return new FixedMatrixOperatorModel(operatorId,
                         null,
-                        new BitmapImage(new Uri(@"\Picture\PaulYOperatorOnLine.png", UriKind.Relative))); // (0, -i)/(i 0) TODO
+                        new BitmapImage(new Uri(@"\Picture\PaulYOperatorOnLine.png", UriKind.Relative))); // (0, -i)/(i 0) TODO матрица
                 case OperatorId.PaulZ:
                     return new FixedMatrixOperatorModel(operatorId,
                         null,
-                        new BitmapImage(new Uri(@"\Picture\PaulZOperatorOnLine.png", UriKind.Relative))); // (1, 0) / (0, -1) TODO
+                        new BitmapImage(new Uri(@"\Picture\PaulZOperatorOnLine.png", UriKind.Relative))); // (1, 0) / (0, -1) TODO матрица
                 case OperatorId.PhaseS:
                     return new FixedMatrixOperatorModel(operatorId,
                         null,
-                        new BitmapImage(new Uri(@"\Picture\PhaseSOperatorOnLine.png", UriKind.Relative))); // (1, 0) / (0, -i) TODO
+                        new BitmapImage(new Uri(@"\Picture\PhaseSOperatorOnLine.png", UriKind.Relative))); // (1, 0) / (0, -i) TODO матрица
                 case OperatorId.ElemP8:
                     return new FixedMatrixOperatorModel(operatorId,
                         null,
-                        null); // (1, 0) / (0, e^(i*pi/4)) TODO
+                        null); // (1, 0) / (0, e^(i*pi/4)) TODO картинка и матрица
                 case OperatorId.PostselectOff:
                     return new FixedMatrixOperatorModel(operatorId,
                         new Matrix<Complex>(new Complex[2, 2] {{1, 0}, {0, 0}}),
-                        null); // TODO
+                        null); // TODO картинка
                 case OperatorId.PostselectOn:
                     return new FixedMatrixOperatorModel(operatorId,
                         new Matrix<Complex>(new Complex[2, 2] {{0, 0}, {0, 1}}),
-                        null); // TODO
+                        null); // TODO картинка
                 default:
                     return new EmptyOperatorModel();
+            }
+        }
+
+        public static SizeDependentOperatorModel Create(OperatorId id, int index)
+        {
+            switch (id)
+            {
+                case OperatorId.QFT:
+                    return new QFTOperatorModel(null, index); // TODO картинка
+                default:
+                    throw new ArgumentOutOfRangeException();
             }
         }
     }

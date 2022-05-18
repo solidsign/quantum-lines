@@ -28,13 +28,13 @@ namespace quantum_lines
         private int qubitLinesAmount;
         private ProgramView _programView;
 
-        private List<QubitLineComponents> _qubitLines;
+        private List<QubitLineGridComponents> _qubitLines;
 
         public MainWindow()
         {
             InitializeComponent();
             qubitLinesAmount = 0;
-            _qubitLines = new List<QubitLineComponents>(QUBIT_LINES_AMOUNT);
+            _qubitLines = new List<QubitLineGridComponents>(QUBIT_LINES_AMOUNT);
             _programView = new ProgramView(CreateMenuButtons(), CreateQubitLines()); // <- от сюда по сути и идет инициализация всей приложухи
         }
 
@@ -68,40 +68,71 @@ namespace quantum_lines
         private QubitLineArguments CreateQubitLine(int index)
         {
             var line = AddLine(index);
-            var (images, stackPanel) = AddOperatorImages(index);
+            var (images,upButtons,downButtons, stackPanel) = AddOperatorImages(index);
             var qubitBasisStateButton = QubitBasisStateButton(index);
             var (qubitResult, qubitResultImage) = AddQubitResult(index);
 
-            var qubitLineArguments = new QubitLineArguments(qubitBasisStateButton, QubitBasisState.Zero, images, qubitResult);
-            _qubitLines.Add(new QubitLineComponents(qubitLineArguments, line, qubitResultImage, stackPanel));
+            var qubitLineArguments = new QubitLineArguments(qubitBasisStateButton, QubitBasisState.Zero, images, upButtons, downButtons, qubitResult);
+            _qubitLines.Add(new QubitLineGridComponents(qubitLineArguments, line, qubitResultImage, stackPanel));
             return qubitLineArguments;
         }
 
-        private (List<(OperatorId id, Image image)>, StackPanel) AddOperatorImages(int index)
+        private (List<(OperatorId id, Image image)>, List<Button>, List<Button>, StackPanel) AddOperatorImages(int index)
         {
             var images = new List<(OperatorId id, Image image)>(QUBIT_LINE_SIZE);
+            var upButtons = new List<Button>(QUBIT_LINE_SIZE);
+            var downButtons = new List<Button>(QUBIT_LINE_SIZE);
 
-            var stackPanel = new StackPanel()
+            var overallStackPanel = new StackPanel()
             {
                 Orientation = Orientation.Horizontal
             };
-            Grid.SetRow(stackPanel, index);
-            Grid.SetColumn(stackPanel, 1);
+            Grid.SetRow(overallStackPanel, index);
+            Grid.SetColumn(overallStackPanel, 1);
 
             for (int i = 0; i < QUBIT_LINE_SIZE; i++)
             {
+                var stackPanel = new StackPanel
+                {
+                    Orientation = Orientation.Vertical,
+                    HorizontalAlignment = HorizontalAlignment.Center,
+                    VerticalAlignment = VerticalAlignment.Center
+                };
+
                 var image = new Image()
                 {
                     Height = 50,
                     Width = 50,
                     Margin = new Thickness(10, 0, 10, 0)
                 };
+
+                var upAddButton = new Button
+                {
+                    Content = "↑",
+                    Width = 20,
+                    FontSize = 10,
+                    Visibility = Visibility.Hidden
+                };
+                
+                var downAddButton = new Button
+                {
+                    Content = "↓",
+                    Width = 20,
+                    FontSize = 10,
+                    Visibility = Visibility.Hidden
+                };
+                
+                stackPanel.Children.Add(upAddButton);
                 stackPanel.Children.Add(image);
+                stackPanel.Children.Add(downAddButton);
+                overallStackPanel.Children.Add(stackPanel);
                 images.Add((OperatorId.Empty, image));
+                upButtons.Add(upAddButton);
+                downButtons.Add(downAddButton);
             }
 
-            schemeGrid.Children.Add(stackPanel);
-            return (images, stackPanel);
+            schemeGrid.Children.Add(overallStackPanel);
+            return (images, upButtons, downButtons, overallStackPanel);
         }
 
         private (Label, Image) AddQubitResult(int index)
