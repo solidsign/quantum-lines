@@ -9,7 +9,7 @@ using System.Windows.Media.Imaging;
 
 namespace quantum_lines.Program.Operators
 {
-    public class OperatorOnLineView
+    public class OperatorOnLineView : IEquatable<Image>
     {
         private OperatorOnLineViewModel _viewModel;
         private MenuSchemeConnector _connector;
@@ -32,6 +32,11 @@ namespace quantum_lines.Program.Operators
         private void ChangeButtonImage()
         {
             _image.Source = _viewModel.Image;
+        }
+
+        public bool Equals(Image? other)
+        {
+            return _image == other;
         }
     }
 

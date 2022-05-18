@@ -15,7 +15,7 @@ using System.Windows.Shapes;
 
 namespace quantum_lines
 {
-    public class QubitInputView
+    public class QubitInputView : IEquatable<Button>
     {
         private Button _currentValueButton;
         
@@ -34,6 +34,11 @@ namespace quantum_lines
         {
             _viewModel.SwitchState();
             _currentValueButton.Content = _viewModel.QubitState;
+        }
+
+        public bool Equals(Button? other)
+        {
+            return _currentValueButton == other;
         }
     }
 

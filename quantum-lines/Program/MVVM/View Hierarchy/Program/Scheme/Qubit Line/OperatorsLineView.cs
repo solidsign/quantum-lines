@@ -17,7 +17,7 @@ using quantum_lines.Program.Operators;
 
 namespace quantum_lines
 {
-    public class OperatorsLineView
+    public class OperatorsLineView : IEquatable<List<Image>>
     {
         private List<OperatorOnLineView> _views;
         public OperatorsLineView(List<(OperatorId id, Image image)> images, MenuSchemeConnector connector, Action<List<OperatorOnLineModel>> addLine)
@@ -31,6 +31,11 @@ namespace quantum_lines
             addLine(operatorModels);
             
             void AddModel(OperatorOnLineModel model) => operatorModels.Add(model);
+        }
+
+        public bool Equals(List<Image>? other)
+        {
+            return _views.TrueForAll(x => other.Any(i => x.Equals(i)));
         }
     }
 }

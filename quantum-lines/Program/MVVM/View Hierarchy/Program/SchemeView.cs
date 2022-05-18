@@ -32,6 +32,16 @@ namespace quantum_lines
             }
         }
 
+        public void AddLine(QubitLineArguments args)
+        {
+            var line = _qubitLines.Find(x => x.Equals(args));
+            _qubitLines.Remove(line);
+        }
+
+        public void RemoveLine()
+        {
+            // TODO
+        }
     }
 
     public class SchemeViewModel

@@ -17,7 +17,7 @@ using quantum_lines.Program.Operators;
 
 namespace quantum_lines
 {
-    public class QubitLineView
+    public class QubitLineView : IEquatable<QubitLineArguments>
     {
         private QubitInputView _startValue;
         private OperatorsLineView _operatorsLine;
@@ -28,8 +28,14 @@ namespace quantum_lines
             _qubitResult = new QubitResultView(args.QubitResultLabel, addResult);
             _startValue = new QubitInputView(args.StartValue, args.StartValueButton, addInput);
             _operatorsLine = new OperatorsLineView(args.OperatorsLineImages, connector, addLine);
-            
-            
+        }
+
+        public bool Equals(QubitLineArguments? other)
+        {
+            return
+                _qubitResult.Equals(other.QubitResultLabel) &&
+                _startValue.Equals(other.StartValueButton) &&
+                _operatorsLine.Equals(other.OperatorsLineImages.Select(x => x.Item2).ToList());
         }
     }
 }

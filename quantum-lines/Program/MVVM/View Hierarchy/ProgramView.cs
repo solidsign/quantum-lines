@@ -21,12 +21,12 @@ namespace quantum_lines.Program
 
         public void RemoveLine()
         {
-            // TODO
+            _scheme.RemoveLine();
         }
 
         public void AddLine(QubitLineArguments args)
         {
-            // TODO
+            _scheme.AddLine(args);
         }
     }
 }

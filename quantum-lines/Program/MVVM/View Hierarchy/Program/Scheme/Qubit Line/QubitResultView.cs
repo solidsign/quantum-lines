@@ -3,7 +3,7 @@ using System.Windows.Controls;
 
 namespace quantum_lines
 {
-    public class QubitResultView
+    public class QubitResultView : IEquatable<Label>
     {
         private QubitResultViewModel _viewModel;
         private Label _label;
@@ -17,6 +17,10 @@ namespace quantum_lines
         }
 
         private void UpdateLabel() => _label.Content = _viewModel.ONPossibility;
+        public bool Equals(Label? other)
+        {
+            return _label == other;
+        }
     }
 
     public class QubitResultViewModel
