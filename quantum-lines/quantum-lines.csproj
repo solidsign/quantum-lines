@@ -54,6 +54,8 @@
     <Resource Include="Picture\qbit.png" />
     <Resource Include="Picture\QFTOperator.png" />
     <Resource Include="Picture\Безымянный.png" />
+    <None Remove="Picture\QFTOperatorFirst.png" />
+    <Resource Include="Picture\QFTOperatorFirst.png" />
   </ItemGroup>
 
 </Project>

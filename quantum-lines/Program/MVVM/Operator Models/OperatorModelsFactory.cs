@@ -28,7 +28,7 @@ namespace quantum_lines.Program.Operators
                         new Matrix<Complex>(new Complex[2, 2] {{0, 1}, {1, 0}}),
                         new BitmapImage(new Uri(@"\Picture\OperatorNot.png", UriKind.Relative))); //(матрица ввида(0, 1)/(1, 0)
                 case OperatorId.QFT:
-                    return new QFTOperatorModel(new BitmapImage(new Uri(@"\Picture\QFTOperator.png", UriKind.Relative)), 1); 
+                    return new QFTOperatorModel(new BitmapImage(new Uri(@"\Picture\QFTOperatorFirst.png", UriKind.Relative)), 1); 
                 case OperatorId.Control:
                     return new ControlOperatorModel(new BitmapImage(new Uri(@"\Picture\ControlOperator.png", UriKind.Relative))); 
                 case OperatorId.AntiControl:
@@ -62,17 +62,12 @@ namespace quantum_lines.Program.Operators
             }
         }
 
-        private static object pow(double v1, Complex complex, int v2)
-        {
-            throw new NotImplementedException();
-        }
-
         public static SizeDependentOperatorModel Create(OperatorId id, int index)
         {
             switch (id)
             {
                 case OperatorId.QFT:
-                    return new QFTOperatorModel(null, index); // TODO картинка
+                    return new QFTOperatorModel(new BitmapImage( new Uri(index == 1 ? @"\Picture\QFTOperatorFirst.png" : @"\Picture\QFTOperator.png", UriKind.Relative)), index);
                 default:
                     throw new ArgumentOutOfRangeException();
             }
