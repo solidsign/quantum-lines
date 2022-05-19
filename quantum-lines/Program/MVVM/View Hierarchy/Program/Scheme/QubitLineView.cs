@@ -35,6 +35,11 @@ namespace quantum_lines
             _operatorsLine.InitAddButtons(up?._operatorsLine, down?._operatorsLine);
         }
 
+        public void ReinitBottomAddButtons(QubitLineView? down)
+        {
+            _operatorsLine.ReinitBottomAddButtons(down?._operatorsLine);
+        }
+
         public bool Equals(QubitLineArguments? other)
         {
             if (other == null) throw new ArgumentException();

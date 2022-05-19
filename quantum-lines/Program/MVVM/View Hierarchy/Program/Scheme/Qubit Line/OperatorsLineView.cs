@@ -41,6 +41,14 @@ namespace quantum_lines
             }
         }
 
+        public void ReinitBottomAddButtons(OperatorsLineView? down)
+        {
+            for (var i = 0; i < _views.Count; i++)
+            {
+                _views[i].ReinitBottomAddButtons(down?._views[i]);
+            }
+        }
+
         public bool Equals(List<Image>? other)
         {
             if (other == null) throw new ArgumentException();

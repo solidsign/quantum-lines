@@ -34,6 +34,10 @@ namespace quantum_lines.Program.Operators
             var newModel = OperatorModelsFactory.Create(newModelId);
             if (newModel.OperatorClass == OperatorClass.SizeDependentMatrix)
             {
+                SizeDependentIndex = 1;
+            }
+            else
+            {
                 SizeDependentIndex = null;
             }
             if (ValidateModelUpdate != null && !ValidateModelUpdate(newModel, this))
@@ -60,7 +64,6 @@ namespace quantum_lines.Program.Operators
 
             SizeDependentIndex = index;
             OperatorModel = newModel;
-            OperatorOnLineUpdated?.Invoke();
         }
 
         public void Dispose()
@@ -68,9 +71,9 @@ namespace quantum_lines.Program.Operators
             OperatorOnLineUpdated = null;
         }
 
-        public void UpdateSizeDependentIndex(int? index)
+        public void UpdateSizeDependentIndex(int index)
         {
-            SizeDependentIndex = index;
+            UpdateModel(OperatorModel.OperatorId, index);
         }
 
         public void UpdateSizeDependentIndexFinished()
