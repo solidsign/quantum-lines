@@ -141,7 +141,57 @@ namespace quantum_lines.Program.Operators
 
         private void ButtonOnClick(object sender, RoutedEventArgs e)
         {
+            var changeSizeDependentChain = _viewModel.OperatorClass == OperatorClass.SizeDependentMatrix;
+            if (changeSizeDependentChain)
+            {
+                StartSizeDependentChainChange();
+            }
+            else
+            {
+                _viewModel.UpdateModel(_connector.GetCurrentOperator());
+            }
+            InitUpperButton(_upperView);
+            InitBottomButton(_bottomView);
+            _bottomView?.InitUpperButton(this);
+            _upperView?.InitBottomButton(this);
+            ChangeButtonImage();
+        }
+
+        private void StartSizeDependentChainChange()
+        {
+            var chain = GetAllChain().Where(x => x != this).ToList();
+            foreach (var el in chain)
+            {
+                el.UpdateSizeDependentChain(OperatorId.Empty);
+            }
             _viewModel.UpdateModel(_connector.GetCurrentOperator());
+        }
+
+        private List<OperatorOnLineView> GetAllChain()
+        {
+            var res = new List<OperatorOnLineView>();
+            var temp = this;
+            while (temp._viewModel.SizeDependentIndex != 1)
+            {
+                res.Add(temp);
+                temp = temp._upperView;
+            }
+            res.Add(temp);
+
+            temp = _bottomView;
+            while (temp != null && temp._viewModel.OperatorClass == OperatorClass.SizeDependentMatrix && temp._viewModel.SizeDependentIndex != 1)
+            {
+                res.Add(temp);
+                temp = temp._bottomView;
+            }
+            
+            res.Sort((a, b) => a._viewModel.SizeDependentIndex.Value - b._viewModel.SizeDependentIndex.Value);
+            return res;
+        }
+
+        private void UpdateSizeDependentChain(OperatorId newModel)
+        {
+            _viewModel.UpdateModel(newModel);
             InitUpperButton(_upperView);
             InitBottomButton(_bottomView);
             _bottomView?.InitUpperButton(this);
