@@ -8,9 +8,9 @@ namespace quantum_lines
         private QubitResultViewModel _viewModel;
         private Label _label;
 
-        public QubitResultView(Label label, Action<QubitResultModel> addResult)
+        public QubitResultView(Label label, Action<QubitResultModel> addResult, Action<QubitResultModel> removeResult)
         {
-            _viewModel = new QubitResultViewModel(addResult);
+            _viewModel = new QubitResultViewModel(addResult, removeResult);
             _viewModel.ResultUpdate += UpdateLabel;
             _label = label;
             _label.Content = _viewModel.ONPossibility;
@@ -32,6 +32,8 @@ namespace quantum_lines
     public class QubitResultViewModel : IDisposable
     {
         private QubitResultModel _model;
+        private Action<QubitResultModel> _removeResult;
+
         public string ONPossibility => _model.Value.ONPossitility.ToString();
         public event Action? ResultUpdate
         {
@@ -39,14 +41,16 @@ namespace quantum_lines
             remove => _model.ResultUpdated -= value;
         }
 
-        public QubitResultViewModel(Action<QubitResultModel> addResult)
+        public QubitResultViewModel(Action<QubitResultModel> addResult, Action<QubitResultModel> removeResult)
         {
+            _removeResult = removeResult;
             _model = new QubitResultModel();
             addResult(_model);
         }
 
         public void Dispose()
         {
+            _removeResult(_model);
             _model.Dispose();
         }
     }

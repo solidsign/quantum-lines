@@ -1,4 +1,5 @@
 using System;
+using System.Windows;
 using System.Windows.Media.Imaging;
 
 namespace quantum_lines.Program.Operators
@@ -42,8 +43,7 @@ namespace quantum_lines.Program.Operators
             }
             if (ValidateModelUpdate != null && !ValidateModelUpdate(newModel, this))
             {
-                // TODO: когда будут кнопки контроллеров - проверить, что ограничение на количество контроллеров отрабатывает корректно
-                // TODO: вывести сообщение об ошибке
+                MessageBox.Show("В столбце не должно быть больше одного контрольного кубита - он уже контролирует все остальные кубиты");
                 return;
             }
 

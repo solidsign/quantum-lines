@@ -20,17 +20,20 @@ namespace quantum_lines
     public class OperatorsLineView : IEquatable<List<Image>>, IDisposable
     {
         private List<OperatorOnLineView> _views;
-        public OperatorsLineView(List<(OperatorId id, Image image)> images, List<Button> upButtons, List<Button> downButtons, MenuSchemeConnector connector, Action<List<OperatorOnLineModel>> addLine)
+        private List<OperatorOnLineModel> _operatorModels;
+        private Action<List<OperatorOnLineModel>> _removeLine;
+        public OperatorsLineView(List<(OperatorId id, Image image)> images, List<Button> upButtons, List<Button> downButtons, MenuSchemeConnector connector, Action<List<OperatorOnLineModel>> addLine, Action<List<OperatorOnLineModel>> removeLine)
         {
-            var operatorModels = new List<OperatorOnLineModel>(images.Count);
+            _removeLine = removeLine;
+            _operatorModels = new List<OperatorOnLineModel>(images.Count);
             _views = new List<OperatorOnLineView>();
             for (var i = 0; i < images.Count; i++)
             {
                 _views.Add(new OperatorOnLineView(images[i].id, images[i].image, upButtons[i], downButtons[i], connector, AddModel));
             }
-            addLine(operatorModels);
+            addLine(_operatorModels);
             
-            void AddModel(OperatorOnLineModel model) => operatorModels.Add(model);
+            void AddModel(OperatorOnLineModel model) => _operatorModels.Add(model);
         }
 
         public void InitAddButtons(OperatorsLineView? up, OperatorsLineView? down)
@@ -57,6 +60,7 @@ namespace quantum_lines
 
         public void Dispose()
         {
+            _removeLine(_operatorModels);
             foreach (var view in _views)
             {
                 view.Dispose();

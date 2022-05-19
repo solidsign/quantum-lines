@@ -30,7 +30,7 @@ namespace quantum_lines
             _qubitLines = new List<QubitLineView>();
             foreach (var qubitLine in qubitLines)
             {
-                _qubitLines.Add(new QubitLineView(qubitLine, menuSchemeConnector, _viewModel.AddResult, _viewModel.AddInput, _viewModel.AddLine));
+                _qubitLines.Add(new QubitLineView(qubitLine, menuSchemeConnector, _viewModel.AddResult, _viewModel.AddInput, _viewModel.AddLine, _viewModel.RemoveResult, _viewModel.RemoveInput, _viewModel.RemoveLine));
             }
             
             for (var i = 0; i < _qubitLines.Count; i++)
@@ -43,7 +43,7 @@ namespace quantum_lines
 
         public void AddLine(QubitLineArguments args)
         {
-            _qubitLines.Add(new QubitLineView(args, _menuSchemeConnector, _viewModel.AddResult, _viewModel.AddInput, _viewModel.AddLine));
+            _qubitLines.Add(new QubitLineView(args, _menuSchemeConnector, _viewModel.AddResult, _viewModel.AddInput, _viewModel.AddLine, _viewModel.RemoveResult, _viewModel.RemoveInput, _viewModel.RemoveLine));
             var last = _qubitLines.TakeLast(2).ToList();
             last[0].ReinitBottomAddButtons(last[1]);
             last[1].InitAddButtons(last[0], null);
@@ -93,28 +93,40 @@ namespace quantum_lines
             bool ValidateOperatorUpdate(OperatorModel newOperator, OperatorOnLineModel currentOperator)
             {
                 if (newOperator.OperatorClass != OperatorClass.Controller) return true;
+
+                return FindColumn(currentOperator)
+                    .Where(x => x != currentOperator)
+                    .All(x => x.OperatorClass != OperatorClass.Controller);
                 
-                foreach (var operatorOnLineModel in FindLine(currentOperator))
+                List<OperatorOnLineModel> FindColumn(OperatorOnLineModel model)
                 {
-                    if (operatorOnLineModel.OperatorModel.OperatorClass == OperatorClass.Controller)
-                        return false;
-                }
+                    var cols = _model.OperatorColumns;
 
-                return true;
-            }
-
-            List<OperatorOnLineModel> FindLine(OperatorOnLineModel model)
-            {
-                foreach (var operatorLine in _model.OperatorLines)
-                {
-                    foreach (var operatorOnLineModel in operatorLine)
+                    foreach (var col in cols)
                     {
-                        if (operatorOnLineModel == model) return operatorLine;
+                        foreach (var operatorOnLineModel in col)
+                        {
+                            if (operatorOnLineModel == model) return col;
+                        }
                     }
+                    throw new KeyNotFoundException();
                 }
-
-                throw new KeyNotFoundException();
             }
+        }
+        
+        public void RemoveInput(QubitInputModel model)
+        {
+            _model.Inputs.Remove(model);
+        }
+
+        public void RemoveResult(QubitResultModel model)
+        {
+            _model.Results.Remove(model);
+        }
+
+        public void RemoveLine(List<OperatorOnLineModel> models)
+        {
+            _model.OperatorLines.Remove(models);
         }
     }
 }

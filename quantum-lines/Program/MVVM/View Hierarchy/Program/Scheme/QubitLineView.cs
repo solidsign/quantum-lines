@@ -23,11 +23,11 @@ namespace quantum_lines
         private OperatorsLineView _operatorsLine;
         private QubitResultView _qubitResult;
 
-        public QubitLineView(QubitLineArguments args, MenuSchemeConnector connector, Action<QubitResultModel> addResult, Action<QubitInputModel> addInput, Action<List<OperatorOnLineModel>> addLine)
+        public QubitLineView(QubitLineArguments args, MenuSchemeConnector connector, Action<QubitResultModel> addResult, Action<QubitInputModel> addInput, Action<List<OperatorOnLineModel>> addLine, Action<QubitResultModel> removeResult, Action<QubitInputModel> removeInput, Action<List<OperatorOnLineModel>> removeLine)
         {
-            _qubitResult = new QubitResultView(args.QubitResultLabel, addResult);
-            _startValue = new QubitInputView(args.StartValue, args.StartValueButton, addInput);
-            _operatorsLine = new OperatorsLineView(args.OperatorsLineImages, args.UpButtons, args.DownButtons, connector, addLine);
+            _qubitResult = new QubitResultView(args.QubitResultLabel, addResult, removeResult);
+            _startValue = new QubitInputView(args.StartValue, args.StartValueButton, addInput, removeInput);
+            _operatorsLine = new OperatorsLineView(args.OperatorsLineImages, args.UpButtons, args.DownButtons, connector, addLine, removeLine);
         }
 
         public void InitAddButtons(QubitLineView? up, QubitLineView? down)

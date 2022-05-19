@@ -21,9 +21,9 @@ namespace quantum_lines
         
         private QubitInputViewModel _viewModel;
         
-        public QubitInputView(QubitBasisState startValue, Button button, Action<QubitInputModel> addInput)
+        public QubitInputView(QubitBasisState startValue, Button button, Action<QubitInputModel> addInput, Action<QubitInputModel> removeInput)
         {
-            _viewModel = new QubitInputViewModel(startValue, addInput);
+            _viewModel = new QubitInputViewModel(startValue, addInput, removeInput);
 
             _currentValueButton = button;
             _currentValueButton.Content = _viewModel.QubitState;
@@ -52,11 +52,13 @@ namespace quantum_lines
     {
         private QubitInputModel _model;
         private QubitBasisState _basisState;
+        private Action<QubitInputModel> _removeInput;
 
         public string QubitState => Qubit.BasisStateToString(_basisState);
-        public QubitInputViewModel(QubitBasisState startValue, Action<QubitInputModel> addInput)
+        public QubitInputViewModel(QubitBasisState startValue, Action<QubitInputModel> addInput, Action<QubitInputModel> removeInput)
         {
             _basisState = startValue;
+            _removeInput = removeInput;
             _model = new QubitInputModel(startValue);
             addInput(_model);
         }
@@ -70,6 +72,7 @@ namespace quantum_lines
 
         public void Dispose()
         {
+            _removeInput(_model);
             _model.Dispose();
         }
     }

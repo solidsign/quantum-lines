@@ -22,5 +22,24 @@ namespace quantum_lines
         public List<QubitInputModel> Inputs { get; private set; }
         public List<QubitResultModel> Results { get; private set; }
         public List<List<OperatorOnLineModel>> OperatorLines { get; private set; }
+
+        public List<List<OperatorOnLineModel>> OperatorColumns
+        {
+            get
+            {
+                List<List<OperatorOnLineModel>> res = new List<List<OperatorOnLineModel>>();
+                for (var i = 0; i < OperatorLines[0].Count; i++)
+                {
+                    List<OperatorOnLineModel> col = new List<OperatorOnLineModel>();
+                    for (var j = 0; j < OperatorLines.Count; j++)
+                    {
+                        col.Add(OperatorLines[j][i]);
+                    }
+
+                    res.Add(col);
+                }
+                return res;
+            }
+        }
     }
 }
