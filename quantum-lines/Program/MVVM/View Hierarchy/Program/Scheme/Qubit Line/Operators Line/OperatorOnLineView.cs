@@ -11,11 +11,11 @@ namespace quantum_lines.Program.Operators
 {
     public class OperatorOnLineView : IEquatable<Image>, IDisposable
     {
-        private OperatorOnLineViewModel _viewModel;
-        private MenuSchemeConnector _connector;
-        private Image _image;
-        private Button _upButton;
-        private Button _downButton;
+        private readonly OperatorOnLineViewModel _viewModel;
+        private readonly MenuSchemeConnector _connector;
+        private readonly Image _image;
+        private readonly Button _upButton;
+        private readonly Button _downButton;
         private OperatorOnLineView? _upperView;
         private OperatorOnLineView? _bottomView;
         public OperatorOnLineView(OperatorId operatorId, Image image, Button upButton, Button downButton, MenuSchemeConnector connector, Action<OperatorOnLineModel> addModel)
@@ -26,64 +26,176 @@ namespace quantum_lines.Program.Operators
             _upButton = upButton;
             _downButton = downButton;
             ChangeButtonImage();
-            image.MouseLeftButtonDown += ButtonOnClick;
+            image.MouseLeftButtonDown += ButtonOnClick;         
+            _upButton.Click += UpButtonOnClick;
+            _downButton.Click += DownButtonOnClick;
         }
 
         public void InitAddButtons(OperatorOnLineView? upperView, OperatorOnLineView? bottomView)
         {
-            _upperView = upperView;
-            _bottomView = bottomView;
             InitUpperButton(upperView);
             InitBottomButton(bottomView);
         }
 
+        public void ReinitBottomAddButtons(OperatorOnLineView? downView)
+        {
+            InitBottomButton(downView);
+        }
+
         private void InitUpperButton(OperatorOnLineView? upperView)
         {
-            if (upperView == null) return;
+            _upButton.Visibility = Visibility.Hidden;
+            _upperView = upperView;
+            if (_upperView == null) return;
+            if (_viewModel.OperatorClass != OperatorClass.SizeDependentMatrix) return;
+            if (_upperView._viewModel.OperatorClass == OperatorClass.SizeDependentMatrix) return;
             _upButton.Visibility = Visibility.Visible;
-            _upButton.Click += UpButtonOnClick;
         }
-        
+
         private void InitBottomButton(OperatorOnLineView? bottomView)
         {
-            if (bottomView == null) return;
+            _downButton.Visibility = Visibility.Hidden;
+            _bottomView = bottomView;
+            if (_bottomView == null) return;
+            if (_viewModel.OperatorClass != OperatorClass.SizeDependentMatrix) return;
+            if (_bottomView._viewModel.OperatorClass == OperatorClass.SizeDependentMatrix) return;
             _downButton.Visibility = Visibility.Visible;
-            _downButton.Click += DownButtonOnClick;
         }
 
         private void DownButtonOnClick(object sender, RoutedEventArgs e)
         {
+            if (_bottomView == null) throw new Exception("Upper view is null!");
             _bottomView.DownButtonFromAboveOnClick(_viewModel.OperatorId, _viewModel.SizeDependentIndex.Value);
+            InitUpperButton(_upperView);
+            InitBottomButton(_bottomView);
+            _bottomView?.InitUpperButton(this);
+            _upperView?.InitBottomButton(this);
+            ChangeButtonImage();
         }
-        
+
         private void UpButtonOnClick(object sender, RoutedEventArgs e)
         {
-            _upperView.DownButtonFromAboveOnClick(_viewModel.OperatorId, _viewModel.SizeDependentIndex.Value);
+            if (_upperView == null) throw new Exception("Upper view is null!");
+            _upperView.UpButtonFromBottomOnClick(_viewModel.OperatorId, _viewModel.SizeDependentIndex.Value);
+            InitUpperButton(_upperView);
+            InitBottomButton(_bottomView);
+            _bottomView?.InitUpperButton(this);
+            _upperView?.InitBottomButton(this);
+            ChangeButtonImage();
         }
 
-        public void DownButtonFromAboveOnClick(OperatorId id, int index)
+        private void DownButtonFromAboveOnClick(OperatorId id, int index)
+        { 
+            _viewModel.UpdateModel(id, index + 1);
+            InitUpperButton(_upperView);
+            InitBottomButton(_bottomView);
+            _bottomView?.InitUpperButton(this);
+            _upperView?.InitBottomButton(this);
+            ChangeButtonImage();
+            _viewModel.UpdateSizeDependentIndexFinished();
+        }
+
+        private void UpButtonFromBottomOnClick(OperatorId id, int index)
         {
+            _viewModel.UpdateModel(id, 1);
+            if (_bottomView == null)
+            {
+                _viewModel.UpdateSizeDependentIndexFinished();
+                return;
+            }
+            if (_bottomView._viewModel.OperatorClass != OperatorClass.SizeDependentMatrix)
+            {
+                _viewModel.UpdateSizeDependentIndexFinished();
+                return;
+            }
+            _bottomView.UpdateSizeDependentIndexCascade(2);
+            
+            InitUpperButton(_upperView);
+            InitBottomButton(_bottomView);
+            _bottomView?.InitUpperButton(this);
+            _upperView?.InitBottomButton(this);
+            ChangeButtonImage();
         }
 
-        public void UpButtonFromBottomOnClick(OperatorId id, int index)
-        {
-        }
-
-        private void UpdateSizeDependentIndex(int? index)
+        private void UpdateSizeDependentIndexCascade(int index)
         {
             _viewModel.UpdateSizeDependentIndex(index);
+
+            if (_bottomView == null)
+            {
+                _viewModel.UpdateSizeDependentIndexFinished();
+                return;
+            }
+            if (_bottomView._viewModel.OperatorClass != OperatorClass.SizeDependentMatrix)
+            {
+                _viewModel.UpdateSizeDependentIndexFinished();
+                return;
+            }
+            if (_bottomView._viewModel.SizeDependentIndex == 1)
+            {
+                _viewModel.UpdateSizeDependentIndexFinished();
+                return;
+            }
+            _bottomView.UpdateSizeDependentIndexCascade(index + 1);
         }
 
         private void ButtonOnClick(object sender, RoutedEventArgs e)
         {
-            _viewModel.UpdateModel(_connector.GetCurrentOperator());
-            if (_viewModel.OperatorClass != OperatorClass.SizeDependentMatrix)
+            var changeSizeDependentChain = _viewModel.OperatorClass == OperatorClass.SizeDependentMatrix;
+            if (changeSizeDependentChain)
             {
-                _upButton.Visibility = Visibility.Hidden;
-                _downButton.Visibility = Visibility.Hidden;
-                _upButton.Click -= UpButtonOnClick;
-                _downButton.Click -= DownButtonOnClick;
-            }  
+                StartSizeDependentChainChange();
+            }
+            else
+            {
+                _viewModel.UpdateModel(_connector.GetCurrentOperator());
+            }
+            InitUpperButton(_upperView);
+            InitBottomButton(_bottomView);
+            _bottomView?.InitUpperButton(this);
+            _upperView?.InitBottomButton(this);
+            ChangeButtonImage();
+        }
+
+        private void StartSizeDependentChainChange()
+        {
+            var chain = GetAllChain().Where(x => x != this).ToList();
+            foreach (var el in chain)
+            {
+                el.UpdateSizeDependentChain(OperatorId.Empty);
+            }
+            _viewModel.UpdateModel(_connector.GetCurrentOperator());
+        }
+
+        private List<OperatorOnLineView> GetAllChain()
+        {
+            var res = new List<OperatorOnLineView>();
+            var temp = this;
+            while (temp._viewModel.SizeDependentIndex != 1)
+            {
+                res.Add(temp);
+                temp = temp._upperView;
+            }
+            res.Add(temp);
+
+            temp = _bottomView;
+            while (temp != null && temp._viewModel.OperatorClass == OperatorClass.SizeDependentMatrix && temp._viewModel.SizeDependentIndex != 1)
+            {
+                res.Add(temp);
+                temp = temp._bottomView;
+            }
+            
+            res.Sort((a, b) => a._viewModel.SizeDependentIndex.Value - b._viewModel.SizeDependentIndex.Value);
+            return res;
+        }
+
+        private void UpdateSizeDependentChain(OperatorId newModel)
+        {
+            _viewModel.UpdateModel(newModel);
+            InitUpperButton(_upperView);
+            InitBottomButton(_bottomView);
+            _bottomView?.InitUpperButton(this);
+            _upperView?.InitBottomButton(this);
             ChangeButtonImage();
         }
 
@@ -100,6 +212,8 @@ namespace quantum_lines.Program.Operators
         public void Dispose()
         {
             _image.MouseLeftButtonDown -= ButtonOnClick;
+            _upButton.Click -= UpButtonOnClick;
+            _downButton.Click -= DownButtonOnClick;
             _viewModel.Dispose();
         }
     }
@@ -139,9 +253,14 @@ namespace quantum_lines.Program.Operators
             _model.Dispose();
         }
 
-        public void UpdateSizeDependentIndex(int? index)
+        public void UpdateSizeDependentIndex(int index)
         {
             _model.UpdateSizeDependentIndex(index);
         }
+
+        public void UpdateSizeDependentIndexFinished()
+        {
+            _model.UpdateSizeDependentIndexFinished();
+        } 
     }
 }

@@ -19,10 +19,10 @@ namespace quantum_lines.Program.Calculation
         {
             List<Qubit> workingValues = new List<Qubit>(_model.Inputs.Select(x => x.StartQubitValue).ToList());
 
-            foreach (var operatorLine in _model.OperatorLines)
-            {
-                workingValues = new ColumnCalculator(workingValues, operatorLine).Calculate();
-            }
+            // foreach (var operatorLine in _model.OperatorLines)
+            // {
+            //     workingValues = new ColumnCalculator(workingValues, operatorLine).Calculate();
+            // }
 
             TranslateValuesToResult(workingValues);
         }
