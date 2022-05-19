@@ -48,7 +48,11 @@ namespace quantum_lines
                 {OperatorId.PaulZ, paulZMenuButton},
                 {OperatorId.PhaseS, phaseSMenuButton},
                 {OperatorId.ElemP8, elemP8MenuButton},
-                {OperatorId.QFT, QFTMenuButton}
+                {OperatorId.QFT, QFTMenuButton},
+                {OperatorId.Control, controlMenuButton},
+                {OperatorId.AntiControl, antiControlMenuButton },
+                {OperatorId.PostselectOn, postSelectOnMenuButton },
+                {OperatorId.PostselectOff, postSelectOFFMenuButton }
             };
             return buttons;
         }
