@@ -11,7 +11,7 @@ namespace quantum_lines.Utils
         {
             right = right.Transpose();
             right = ConjugateMatrix(right);
-            var res = left * right;
+            var res = MatrixOperations.Multiply(left, right);
             if (res.Length != 1) throw new Exception("ComplexScalarMultiply wrong vectors");
             return res[0,0];
         }

@@ -48,15 +48,18 @@ namespace quantum_lines.Program.Calculation
             
             
             var controlledMatrix = controllerOp.ControlMatrix(leftPart, rightPart);
-            _inValues = MatrixOperations.Multiply(controlledMatrix, _inValues);
+            var result = MatrixOperations.Multiply(controlledMatrix, _inValues);
             if (_inValues == null) throw new ArithmeticException("CalculateWithOutController result is null");
+            _inValues = new Matrix<Complex>(result);
         }
 
         private void CalculateWithOutController()
         {
             var matrix = GetOperatorsMatrix(_operators);
-            _inValues = MatrixOperations.Multiply(matrix, _inValues);
-            if (_inValues == null) throw new ArithmeticException("CalculateWithOutController result is null");
+
+            var result = MatrixOperations.Multiply(matrix, _inValues);
+            if (result == null) throw new ArithmeticException("CalculateWithOutController result is null");
+            _inValues = new Matrix<Complex>(result);
         }
 
         private Matrix<Complex>? GetOperatorsMatrix(List<OperatorModel> operators)
