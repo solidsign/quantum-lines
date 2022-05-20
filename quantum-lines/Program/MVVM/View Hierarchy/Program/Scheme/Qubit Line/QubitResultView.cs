@@ -34,7 +34,7 @@ namespace quantum_lines
         private QubitResultModel _model;
         private Action<QubitResultModel> _removeResult;
 
-        public string ONPossibility => _model.Value.ONPossitility.ToString();
+        public string ONPossibility => _model.Value.ToString();
         public event Action? ResultUpdate
         {
             add => _model.ResultUpdated += value;
