@@ -13,8 +13,8 @@ namespace quantum_lines.Program.Operators
         /// <summary>
         /// Устанавливает последний кубит контрольным
         /// </summary>
-        /// <param name="matrixWithoutControls"></param>
+        /// <param name="leftPart"></param>
         /// <returns></returns>
-        public abstract Matrix<Complex> ControlMatrix(Matrix<Complex> matrixWithoutControls);
+        public abstract Matrix<Complex> ControlMatrix(Matrix<Complex>? leftPart, Matrix<Complex>? rightPart);
     }
 }

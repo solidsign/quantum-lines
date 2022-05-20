@@ -4,9 +4,9 @@ namespace quantum_lines
 {
     public class QubitResultModel : IDisposable
     {
-        public Qubit Value { get; private set; }
+        public Possibility Value { get; private set; }
 
-        public void SetResult(Qubit value)
+        public void SetResult(Possibility value)
         {
             Value = value;
             ResultUpdated?.Invoke();
@@ -16,7 +16,7 @@ namespace quantum_lines
         
         public QubitResultModel()
         {
-            Value = new Qubit(QubitBasisState.Zero);
+            Value = new Qubit(QubitBasisState.Zero).ONPossitility;
         }
 
         public void Dispose()

@@ -1,7 +1,10 @@
 using System.Collections.Generic;
 using System.Linq;
+using System.Numerics;
 using System.Windows.Documents;
+using MatrixDotNet;
 using quantum_lines.Program.Operators;
+using quantum_lines.Utils;
 
 namespace quantum_lines.Program.Calculation
 {
@@ -17,22 +20,41 @@ namespace quantum_lines.Program.Calculation
 
         private void Calculate()
         {
-            List<Qubit> workingValues = new List<Qubit>(_model.Inputs.Select(x => x.StartQubitValue).ToList());
+            List<Qubit> inValues = new List<Qubit>(_model.Inputs.Select(x => x.StartQubitValue).ToList());
+            var workingValues = GetStateMatrix(inValues);
 
-            // foreach (var operatorLine in _model.OperatorLines)
-            // {
-            //     workingValues = new ColumnCalculator(workingValues, operatorLine).Calculate();
-            // }
+            foreach (var operatorColumn in _model.OperatorColumns)
+            {
+                workingValues = new ColumnCalculator(workingValues, operatorColumn).Calculate();
+            }
 
             TranslateValuesToResult(workingValues);
         }
 
-        private void TranslateValuesToResult(List<Qubit> values)
+        private void TranslateValuesToResult(Matrix<Complex> values)
         {
-            for (int i = 0; i < values.Count; i++)
+            for (int i = 0; i < _model.Results.Count; i++)
             {
-                _model.Results[i].SetResult(values[i]);
+                _model.Results[i].SetResult(MeasureResult(values, i));
             }
+        }
+
+        private Possibility MeasureResult(Matrix<Complex> values, int i)
+        {
+            var state = new Matrix<Complex>(values.Rows, 1, Complex.Zero);
+            state[i, 0] = Complex.One;
+            var scalar = ScalarMultiplier.ComplexMultiply(values, state);
+            return new Possibility(scalar.Magnitude * scalar.Magnitude);
+        }
+
+        private Matrix<Complex> GetStateMatrix(List<Qubit> qubits)
+        {
+            var res = new Matrix<Complex>(new Complex[1, 1] {{1}});
+            foreach (var qubit in qubits)
+            {
+                res = TensorMultiplier.Multiply(res, qubit.StateMatrix);
+            }
+            return res;
         }
     }
 }

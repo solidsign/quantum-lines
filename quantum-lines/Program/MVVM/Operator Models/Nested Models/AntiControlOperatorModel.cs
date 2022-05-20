@@ -11,13 +11,16 @@ namespace quantum_lines.Program.Operators
         {
         }
 
-        public override Matrix<Complex> ControlMatrix(Matrix<Complex> matrixWithoutControls)
+        public override Matrix<Complex> ControlMatrix(Matrix<Complex>? leftPart, Matrix<Complex>? rightPart)
         {
             var onMatrix = ((FixedMatrixOperatorModel) OperatorModelsFactory.Create(OperatorId.PostselectOn)).GetMatrix();
             var offMatrix = ((FixedMatrixOperatorModel) OperatorModelsFactory.Create(OperatorId.PostselectOff)).GetMatrix();
-            var idMatrix = IdentityMatrix.Create(matrixWithoutControls.Rows);
-            var identityPart = TensorMultiplier.Multiply(idMatrix, onMatrix);
-            var operatorPart = TensorMultiplier.Multiply(matrixWithoutControls, offMatrix);
+            if (leftPart == null) leftPart = new Matrix<Complex>(new Complex[1, 1] {{1}});
+            if (rightPart == null) rightPart = new Matrix<Complex>(new Complex[1, 1] {{1}});
+            var leftIdMatrix = IdentityMatrix.Create(leftPart.Rows);
+            var rightIdMatrix = IdentityMatrix.Create(rightPart.Rows);
+            var identityPart = TensorMultiplier.Multiply(leftIdMatrix, onMatrix, rightIdMatrix);
+            var operatorPart = TensorMultiplier.Multiply(leftPart, offMatrix, rightPart);
             Matrix<Complex> res = identityPart + operatorPart;
             return res;
         }
