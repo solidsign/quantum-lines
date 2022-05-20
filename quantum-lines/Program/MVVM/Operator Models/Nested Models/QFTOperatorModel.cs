@@ -12,7 +12,7 @@ namespace quantum_lines.Program.Operators
         {
 
         }
-        public Matrix<Complex> CreateMatrix(int size)
+        public override Matrix<Complex> GetMatrix(int size)
         {
             int N = 1 << size;
             Matrix<Complex> matrix = new Matrix<Complex>(row: N, col: N, value: Complex.One);
