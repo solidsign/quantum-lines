@@ -12,15 +12,9 @@ namespace quantum_lines.Program.Operators
         {
 
         }
-
-        // size - количество кубит
-        // надо составить матрицу линейного оператора для size
-        // как вариант можно взять формулу QFT|x> и подставлять в нее стандартный базис
-        // т.е. подставлять в формулу вместо |x> |000....0000>, |000...00001>, |000...00010>, ..., |111..1111>
-        // и составлять таким образом матрицу, записывая в каждый столбец то, что вышло из формулы для соответствующего набора кубитов
         public Matrix<Complex> CreateMatrix(int size)
         {
-            int N = (int)Math.Pow(2, size);
+            int N = 1 << size;
             Matrix<Complex> matrix = new Matrix<Complex>(row: N, col: N, value: Complex.One);
             int degree = 1;
             for (int i = 1; i < N; i++)
