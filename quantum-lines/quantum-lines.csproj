@@ -32,11 +32,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="gong-wpf-dragdrop" Version="3.1.1" />
-    <PackageReference Include="MatrixDotNet" Version="0.0.7.3" />
-  </ItemGroup>
-
-  <ItemGroup>
     <Resource Include="Picture\AntiControlOperator.png" />
     <Resource Include="Picture\clearOperatorOnLine.png" />
     <Resource Include="Picture\ControlOperator.png" />
@@ -56,6 +51,12 @@
     <Resource Include="Picture\Безымянный.png" />
     <None Remove="Picture\QFTOperatorFirst.png" />
     <Resource Include="Picture\QFTOperatorFirst.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="MatrixDotNet, Version=0.0.7.3, Culture=neutral, PublicKeyToken=null">
+      <HintPath>..\MatrixDotNet.dll</HintPath>
+    </Reference>
   </ItemGroup>
 
 </Project>

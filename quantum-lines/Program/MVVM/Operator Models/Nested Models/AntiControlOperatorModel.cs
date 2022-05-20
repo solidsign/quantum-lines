@@ -21,7 +21,7 @@ namespace quantum_lines.Program.Operators
             var rightIdMatrix = IdentityMatrix.Create(rightPart.Rows);
             var identityPart = TensorMultiplier.Multiply(leftIdMatrix, onMatrix, rightIdMatrix);
             var operatorPart = TensorMultiplier.Multiply(leftPart, offMatrix, rightPart);
-            Matrix<Complex> res = identityPart + operatorPart;
+            Matrix<Complex> res = MatrixOperations.Add(identityPart, operatorPart);
             return res;
         }
     }
