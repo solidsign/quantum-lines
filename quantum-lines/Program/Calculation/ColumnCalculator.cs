@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Numerics;
-using System.Windows.Media;
 using MatrixDotNet;
 using quantum_lines.Program.Operators;
 using quantum_lines.Utils;
@@ -24,7 +23,8 @@ namespace quantum_lines.Program.Calculation
         {
             if (_operators.Any(x => x.OperatorClass == OperatorClass.Controller))
             {
-                CalculateWithController(_operators.FindIndex(x => x.OperatorClass == OperatorClass.Controller));
+                var controllerIndex = _operators.FindIndex(x => x.OperatorClass == OperatorClass.Controller);
+                CalculateWithController(controllerIndex);
             }
             else
             {
@@ -38,16 +38,17 @@ namespace quantum_lines.Program.Calculation
         {
             var controllerOp = _operators[controllerIndex] as ControllerOperatorModelBase ?? throw new InvalidOperationException("CalculateWithController:  Controller operator found wrong");
 
-            var leftPart = GetOperatorsMatrix(
-                _operators.TakeWhile(x => x.OperatorClass != OperatorClass.Controller).ToList());
-            var rightPart = GetOperatorsMatrix(
-                _operators
-                    .SkipWhile(x => x.OperatorClass != OperatorClass.Controller)
-                    .Where(x => x.OperatorClass != OperatorClass.Controller)
-                    .ToList());
+            var leftPart = _operators.TakeWhile(x => x.OperatorClass != OperatorClass.Controller).ToList();
+            var rightPart = _operators
+                .SkipWhile(x => x.OperatorClass != OperatorClass.Controller)
+                .Where(x => x.OperatorClass != OperatorClass.Controller)
+                .ToList();
+
+            var leftPartMatrix = GetOperatorsMatrix(leftPart);
+            var rightPartMatrix = GetOperatorsMatrix(rightPart);
+            // TODO отладить эту хуйню
             
-            
-            var controlledMatrix = controllerOp.ControlMatrix(leftPart, rightPart);
+            var controlledMatrix = controllerOp.ControlMatrix(leftPartMatrix, rightPartMatrix);
             var result = MatrixOperations.Multiply(controlledMatrix, _inValues);
             if (_inValues == null) throw new ArithmeticException("CalculateWithOutController result is null");
             _inValues = new Matrix<Complex>(result);
@@ -62,10 +63,8 @@ namespace quantum_lines.Program.Calculation
             _inValues = new Matrix<Complex>(result);
         }
 
-        private Matrix<Complex>? GetOperatorsMatrix(List<OperatorModel> operators)
+        private Matrix<Complex> GetOperatorsMatrix(List<OperatorModel> operators)
         {
-            if (operators.Count == 0) return null;
-            
             Matrix<Complex> res = new Matrix<Complex>(new Complex[1,1]{{1}});
 
             for (var i = 0; i < operators.Count; i++)

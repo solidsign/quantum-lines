@@ -35,16 +35,23 @@ namespace quantum_lines.Program.Calculation
         {
             for (int i = 0; i < _model.Results.Count; i++)
             {
-                _model.Results[i].SetResult(MeasureResult(values, i));
+                _model.Results[_model.Results.Count - i - 1].SetResult(MeasureResult(values, i));
             }
         }
 
         private Possibility MeasureResult(Matrix<Complex> values, int i)
         {
-            var state = new Matrix<Complex>(values.Rows, 1, Complex.Zero);
-            state[i, 0] = Complex.One;
-            var scalar = ScalarMultiplier.ComplexMultiply(values, state);
-            return new Possibility(scalar.Magnitude * scalar.Magnitude);
+            double possibility = 0;
+            for (int j = 0; j < values.Rows; j++)
+            {
+                if ((j >> i) % 2 == 0) continue;
+                var state = new Matrix<Complex>(values.Rows, 1, Complex.Zero);
+                state[j, 0] = Complex.One;
+                var scalar = ScalarMultiplier.ComplexMultiply(values, state);
+                possibility += scalar.Magnitude * scalar.Magnitude;
+            }
+            
+            return new Possibility(possibility);
         }
 
         private Matrix<Complex> GetStateMatrix(List<Qubit> qubits)

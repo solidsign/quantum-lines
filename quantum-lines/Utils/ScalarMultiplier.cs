@@ -9,8 +9,8 @@ namespace quantum_lines.Utils
     {
         public static Complex ComplexMultiply(Matrix<Complex> left, Matrix<Complex> right)
         {
-            right = right.Transpose();
-            right = ConjugateMatrix(right);
+            left = left.Transpose();
+            left = ConjugateMatrix(left);
             var res = MatrixOperations.Multiply(left, right);
             if (res.Length != 1) throw new Exception("ComplexScalarMultiply wrong vectors");
             return res[0,0];

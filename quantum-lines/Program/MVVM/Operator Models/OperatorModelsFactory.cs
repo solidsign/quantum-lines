@@ -21,7 +21,7 @@ namespace quantum_lines.Program.Operators
                     return new EmptyOperatorModel();
                 case OperatorId.Hadamard:
                     return new FixedMatrixOperatorModel(operatorId,
-                        new Matrix<Complex>(new Complex[2, 2] {{1, 1}, {1, -1}}),
+                        new Matrix<Complex>(new Complex[2, 2] {{0.7071, 0.7071}, {0.7071, -0.7071}}),
                         new BitmapImage(new Uri(@"\Picture\OperatorHadamar.png", UriKind.Relative)));   //( матрица ввида (1 1)\(1 -1)
                 case OperatorId.Not:
                     return new FixedMatrixOperatorModel(operatorId,
