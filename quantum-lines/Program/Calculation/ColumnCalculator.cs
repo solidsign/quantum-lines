@@ -49,7 +49,7 @@ namespace quantum_lines.Program.Calculation
             
             var controlledMatrix = controllerOp.ControlMatrix(leftPartMatrix, rightPartMatrix);
             var result = MatrixOperations.Multiply(controlledMatrix, _inValues);
-            if (_inValues == null) throw new ArithmeticException("CalculateWithOutController result is null");
+            if (result == null) throw new ArithmeticException("CalculateWithOutController result is null");
             _inValues = new Matrix<Complex>(result);
         }
 
