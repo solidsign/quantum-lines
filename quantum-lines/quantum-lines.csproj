@@ -32,25 +32,61 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Resource Include="Picture\AntiControlOperator.png" />
-    <Resource Include="Picture\clearOperatorOnLine.png" />
-    <Resource Include="Picture\ControlOperator.png" />
-    <Resource Include="Picture\myPhoto.png" />
-    <Resource Include="Picture\OperatorHadamar.png" />
-    <Resource Include="Picture\OperatorNot.png" />
-    <Resource Include="Picture\PaulXOperatorOnLine.png" />
-    <Resource Include="Picture\PaulYOperatorOnLine.png" />
-    <Resource Include="Picture\PaulZOperatorOnLine.png" />
-    <Resource Include="Picture\PhaseSOperatorOnLine.png" />
-    <Resource Include="Picture\PI8Operator.png" />
-    <Resource Include="Picture\pngwing.com.png" />
-    <Resource Include="Picture\PostSelectOFFOperator.png" />
-    <Resource Include="Picture\PostSelectONOperator.png" />
-    <Resource Include="Picture\qbit.png" />
-    <Resource Include="Picture\QFTOperator.png" />
-    <Resource Include="Picture\Безымянный.png" />
+    <Resource Include="Picture\AntiControlOperator.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Picture\clearOperatorOnLine.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Picture\ControlOperator.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Picture\myPhoto.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Picture\OperatorHadamar.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Picture\OperatorNot.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Picture\PaulXOperatorOnLine.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Picture\PaulYOperatorOnLine.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Picture\PaulZOperatorOnLine.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Picture\PhaseSOperatorOnLine.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Picture\PI8Operator.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Picture\pngwing.com.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Picture\PostSelectOFFOperator.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Picture\PostSelectONOperator.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Picture\qbit.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Picture\QFTOperator.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Picture\Безымянный.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
     <None Remove="Picture\QFTOperatorFirst.png" />
-    <Resource Include="Picture\QFTOperatorFirst.png" />
+    <Resource Include="Picture\QFTOperatorFirst.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
   </ItemGroup>
 
   <ItemGroup>
