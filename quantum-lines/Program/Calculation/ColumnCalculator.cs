@@ -46,7 +46,6 @@ namespace quantum_lines.Program.Calculation
 
             var leftPartMatrix = GetOperatorsMatrix(leftPart);
             var rightPartMatrix = GetOperatorsMatrix(rightPart);
-            // TODO отладить эту хуйню
             
             var controlledMatrix = controllerOp.ControlMatrix(leftPartMatrix, rightPartMatrix);
             var result = MatrixOperations.Multiply(controlledMatrix, _inValues);
@@ -75,16 +74,19 @@ namespace quantum_lines.Program.Calculation
                         res = TensorMultiplier.Multiply(res, GetFixedMatrix(operators[i]));
                         break;
                     case OperatorClass.SizeDependentMatrix:
-                        int size = 1;
+                        int size = 0;
                         var op = operators[i];
-                        i++;
-                        while (i < operators.Count && operators[i].OperatorClass == OperatorClass.SizeDependentMatrix &&
-                               ((SizeDependentOperatorModel) operators[i]).Index != 1)
+
+                        do
                         {
                             size++;
                             i++;
-                        }
+                        } while (i < operators.Count &&
+                                 operators[i].OperatorClass == OperatorClass.SizeDependentMatrix &&
+                                 ((SizeDependentOperatorModel) operators[i]).Index != 1);
+                        
                         res = TensorMultiplier.Multiply(res, GetSizedMatrix(size, op));
+                        i--;
                         break;
                     default:
                         throw new ArgumentOutOfRangeException();

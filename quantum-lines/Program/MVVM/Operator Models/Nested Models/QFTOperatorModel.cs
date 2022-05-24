@@ -15,33 +15,18 @@ namespace quantum_lines.Program.Operators
         public override Matrix<Complex> GetMatrix(int size)
         {
             int N = 1 << size;
+            double coef = 1.0 / Math.Sqrt((double) N);
             Matrix<Complex> matrix = new Matrix<Complex>(row: N, col: N, value: Complex.One);
-            int degree = 1;
             for (int i = 1; i < N; i++)
             {
                 for (int j = 1; j < N; j++)
                 {
-                    int multiplex = (degree * j) % 4;
-                    switch (multiplex)
-                    {
-                        case 0:
-                            matrix[i, j] = new Complex(1, 0);
-                            continue;
-                        case 1:
-                            matrix[i, j] = new Complex(0, 1);
-                            continue;
-                        case 2:
-                            matrix[i, j] = new Complex(-1, 0);
-                            continue;
-                        case 3:
-                            matrix[i, j] = new Complex(0, -1);
-                            continue;
-
-                    }
+                    double multiplex = (i * j);
+                    matrix[i, j] = new Complex(Math.Cos(2.0 * Math.PI * multiplex / (double) N), Math.Sin(2.0 * Math.PI * multiplex / (double) N));
                 }
-                degree++;
             }
 
+            matrix *= coef;
             return matrix;
         }
     }
