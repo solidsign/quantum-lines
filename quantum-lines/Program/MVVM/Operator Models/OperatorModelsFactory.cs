@@ -47,7 +47,7 @@ namespace quantum_lines.Program.Operators
                         new BitmapImage(new Uri(@"\Picture\PhaseSOperatorOnLine.png", UriKind.Relative))); // (1, 0) / (0, i) 
                 case OperatorId.ElemP8:
                     return new FixedMatrixOperatorModel(operatorId,
-                        new Complex[2, 2] {{1, 0}, {0, new Complex(1.0 / Math.Sqrt(2.0), 1.0 / Math.Sqrt(2.0))}},
+                        new Complex[2, 2] {{1, 0}, {0, new Complex(0.7071, 0.7071)}},
                         new BitmapImage(new Uri(@"\Picture\PI8Operator.png", UriKind.Relative))); // (1, 0) / (0, e^(i*pi/4)) 
                 case OperatorId.PostselectOff:
                     return new FixedMatrixOperatorModel(operatorId,
