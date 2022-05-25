@@ -43,11 +43,11 @@ namespace quantum_lines.Program.Operators
                         new BitmapImage(new Uri(@"\Picture\PaulZOperatorOnLine.png", UriKind.Relative))); // (1, 0) / (0, -1) 
                 case OperatorId.PhaseS:
                     return new FixedMatrixOperatorModel(operatorId,
-                         new Matrix<Complex>(new Complex[2, 2] { {1, 0}, {0, new Complex(0, -1)} }),
-                        new BitmapImage(new Uri(@"\Picture\PhaseSOperatorOnLine.png", UriKind.Relative))); // (1, 0) / (0, -i) 
+                         new Matrix<Complex>(new Complex[2, 2] { {1, 0}, {0, new Complex(0, 1)} }),
+                        new BitmapImage(new Uri(@"\Picture\PhaseSOperatorOnLine.png", UriKind.Relative))); // (1, 0) / (0, i) 
                 case OperatorId.ElemP8:
                     return new FixedMatrixOperatorModel(operatorId,
-                        new Complex[2, 2] { {1, 0}, { 0, new Complex(Math.Cos(Math.PI / (double)4), Math.Sin(Math.PI / (double)4))} },
+                        new Complex[2, 2] {{1, 0}, {0, new Complex(1.0 / Math.Sqrt(2.0), 1.0 / Math.Sqrt(2.0))}},
                         new BitmapImage(new Uri(@"\Picture\PI8Operator.png", UriKind.Relative))); // (1, 0) / (0, e^(i*pi/4)) 
                 case OperatorId.PostselectOff:
                     return new FixedMatrixOperatorModel(operatorId,
