@@ -14,7 +14,7 @@ namespace quantum_lines
 
         public override string ToString()
         {
-            return $"{Math.Round(_value, 1) * 100f}%";
+            return $"{Math.Round(_value * 100f, 1)}%";
         }
     }
 }

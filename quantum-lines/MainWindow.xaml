@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
-        Title="MainWindow" Height="600" Width="850">
+        Title="Quantum Lines" Height="600" Width="850">
     <Canvas Width="800" Margin="0,0,0,0">
         <ToggleButton x:Name="hadamardMenuButton" Content="H" Canvas.Left="170" Canvas.Top="34" Height="40" Width="40"/>
         <ToggleButton x:Name="paulYMenuButton" Content="Y" Canvas.Left="241" Canvas.Top="90" Height="40" Width="40"/>
