@@ -6,17 +6,17 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="600" Width="850">
     <Canvas Width="800" Margin="0,0,0,0">
-        <ToggleButton x:Name="hadamardMenuButton" Content="Hadamar" Canvas.Left="170" Canvas.Top="34" Height="40" Width="57"/>
-        <ToggleButton x:Name="paulYMenuButton" Content="Y" Canvas.Left="241" Canvas.Top="90" Height="40" Width="58"/>
-        <ToggleButton x:Name="paulZMenuButton" Content="Z" Canvas.Left="304" Canvas.Top="90" Height="40" Width="56"/>
-        <ToggleButton x:Name="phaseSMenuButton" Content="S" Canvas.Left="110" Canvas.Top="34" Height="40" Width="57"/>
-        <ToggleButton x:Name="elemP8MenuButton" Content="T" Canvas.Left="113" Canvas.Top="90" Height="40" Width="57"/>
-        <ToggleButton x:Name="notMenuButton" Content="Not" Canvas.Left="235" Canvas.Top="34" Height="40" Width="70" />
-        <ToggleButton x:Name="QFTMenuButton"  Content="QFT" Canvas.Left="318" Canvas.Top="34" Height="40" Width="66" />
+        <ToggleButton x:Name="hadamardMenuButton" Content="H" Canvas.Left="170" Canvas.Top="34" Height="40" Width="40"/>
+        <ToggleButton x:Name="paulYMenuButton" Content="Y" Canvas.Left="241" Canvas.Top="90" Height="40" Width="40"/>
+        <ToggleButton x:Name="paulZMenuButton" Content="Z" Canvas.Left="304" Canvas.Top="90" Height="40" Width="40" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <ToggleButton x:Name="phaseSMenuButton" Content="S" Canvas.Left="110" Canvas.Top="34" Height="40" Width="40"/>
+        <ToggleButton x:Name="elemP8MenuButton" Content="T" Canvas.Left="110" Canvas.Top="90" Height="40" Width="40" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+        <ToggleButton x:Name="notMenuButton" Content="X" Canvas.Left="241" Canvas.Top="34" Height="40" Width="40" HorizontalAlignment="Center" VerticalAlignment="Center" />
+        <ToggleButton x:Name="QFTMenuButton"  Content="QFT" Canvas.Left="304" Canvas.Top="34" Height="40" Width="40" HorizontalAlignment="Left" VerticalAlignment="Center" />
         <ToggleButton x:Name="controlMenuButton"  Content="control" Canvas.Left="506" Canvas.Top="90" Height="40" Width="75" />
         <ToggleButton x:Name="antiControlMenuButton"  Content="A-Control" Canvas.Left="506" Canvas.Top="34" Height="40" Width="74" />
-        <ToggleButton x:Name="postSelectOnMenuButton"  Content="PSOn" Canvas.Left="411" Canvas.Top="34" Height="40" Width="75" />
-        <ToggleButton x:Name="postSelectOFFMenuButton"  Content="PSOff" Canvas.Left="411" Canvas.Top="90" Height="40" Width="75" />
+        <ToggleButton x:Name="postSelectOnMenuButton"  Content="PSOn" Canvas.Left="411" Canvas.Top="34" Height="40" Width="40" />
+        <ToggleButton x:Name="postSelectOFFMenuButton"  Content="PSOff" Canvas.Left="411" Canvas.Top="90" Height="40" Width="40" />
 
         <ScrollViewer CanContentScroll="True" Height="400" Width="800" Canvas.Top="160">
             <Grid x:Name="schemeGrid" HorizontalAlignment="Left"  VerticalAlignment="Center" Height="800" Width="800">
