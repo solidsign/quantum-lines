@@ -10,6 +10,7 @@ namespace quantum_lines.Program.Operators
         {
         }
 
-        public abstract Matrix<Complex> ControlMatrix(Matrix<Complex> leftPart, Matrix<Complex> rightPart);
+        public abstract Matrix<Complex> GetIdentityPostselect();
+        public abstract Matrix<Complex> GetActionPostselect();
     }
 }

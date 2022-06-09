@@ -41,11 +41,6 @@ namespace quantum_lines.Program.Operators
             {
                 SizeDependentIndex = null;
             }
-            if (ValidateModelUpdate != null && !ValidateModelUpdate(newModel, this))
-            {
-                MessageBox.Show("В столбце не должно быть больше одного контрольного кубита - он уже контролирует все остальные кубиты");
-                return;
-            }
 
             OperatorModel = newModel;
             OperatorOnLineUpdated?.Invoke();

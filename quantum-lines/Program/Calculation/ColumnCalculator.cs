@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Numerics;
+using System.Windows.Media;
 using MatrixDotNet;
 using quantum_lines.Program.Operators;
 using quantum_lines.Utils;
@@ -23,8 +24,7 @@ namespace quantum_lines.Program.Calculation
         {
             if (_operators.Any(x => x.OperatorClass == OperatorClass.Controller))
             {
-                var controllerIndex = _operators.FindIndex(x => x.OperatorClass == OperatorClass.Controller);
-                CalculateWithController(controllerIndex);
+                CalculateWithController();
             }
             else
             {
@@ -34,21 +34,76 @@ namespace quantum_lines.Program.Calculation
             return _inValues;
         }
 
-        private void CalculateWithController(int controllerIndex)
+        private void CalculateWithController()
         {
-            var controllerOp = _operators[controllerIndex] as ControllerOperatorModelBase ?? throw new InvalidOperationException("CalculateWithController:  Controller operator found wrong");
+            var controlsIndexes
+                = _operators.FindAll(x => x.OperatorClass == OperatorClass.Controller)
+                .Select(x => _operators.IndexOf(x)).OrderBy(x => x).ToList();
 
-            var leftPart = _operators.TakeWhile(x => x.OperatorClass != OperatorClass.Controller).ToList();
-            var rightPart = _operators
-                .SkipWhile(x => x.OperatorClass != OperatorClass.Controller)
-                .Where(x => x.OperatorClass != OperatorClass.Controller)
-                .ToList();
+            var controlsAmount = controlsIndexes.Count;
+            var additionsAmount = 1 << controlsAmount;
 
-            var leftPartMatrix = GetOperatorsMatrix(leftPart);
-            var rightPartMatrix = GetOperatorsMatrix(rightPart);
+            var res = new Matrix<Complex>(1 << _operators.Count,1 << _operators.Count, 0);
+
+            for (int variant = 0; variant < additionsAmount - 1; variant++)
+            {
+                List<Matrix<Complex>> temp = new List<Matrix<Complex>>();
+                for (var i = 0; i < _operators.Count; i++)
+                {
+                    if (controlsIndexes.Contains(i))
+                    {
+                        var controllerIndex = controlsIndexes.IndexOf(i);
+
+                        if ((variant >> controllerIndex) % 2 == 0)
+                        {
+                            temp.Add(GetIdentityPartControllerMatrix(i));
+                        }
+                        else
+                        {
+                            temp.Add(GetActionPartControllerMatrix(i));
+                        }
+
+                        continue;
+                    }
+                    temp.Add(IdentityMatrix.Create(2));
+                }
+                
+                res = MatrixOperations.Add(res, TensorMultiplier.Multiply(temp.ToArray()));
+            }
+
+            List<Matrix<Complex>> list = new List<Matrix<Complex>>();
+            for (var i = 0; i < _operators.Count; i++)
+            {
+                if (_operators[i].OperatorClass == OperatorClass.Controller)
+                {
+                    list.Add(GetActionPartControllerMatrix(i));
+                    continue;
+                }
+                switch (_operators[i].OperatorClass)
+                {
+                    case OperatorClass.FixedMatrix:
+                        list.Add(GetFixedMatrix(_operators[i]));
+                        break;
+                    case OperatorClass.SizeDependentMatrix:
+                        int size = 0;
+                        var op = _operators[i];
+                        do
+                        {
+                            size++;
+                            i++;
+                        } while (i < _operators.Count &&
+                                 _operators[i].OperatorClass == OperatorClass.SizeDependentMatrix &&
+                                 ((SizeDependentOperatorModel) _operators[i]).Index != 1);
+                        list.Add(GetSizedMatrix(size, op));
+                        i--;
+                        break;
+                    default:
+                        throw new ArgumentOutOfRangeException();
+                }
+            }
+            res = MatrixOperations.Add(res, TensorMultiplier.Multiply(list.ToArray()));
             
-            var controlledMatrix = controllerOp.ControlMatrix(leftPartMatrix, rightPartMatrix);
-            var result = MatrixOperations.Multiply(controlledMatrix, _inValues);
+            var result = MatrixOperations.Multiply(res, _inValues);
             if (result == null) throw new ArithmeticException("CalculateWithOutController result is null");
             _inValues = new Matrix<Complex>(result);
         }
@@ -61,6 +116,7 @@ namespace quantum_lines.Program.Calculation
             if (result == null) throw new ArithmeticException("CalculateWithOutController result is null");
             _inValues = new Matrix<Complex>(result);
         }
+
 
         private Matrix<Complex> GetOperatorsMatrix(List<OperatorModel> operators)
         {
@@ -104,6 +160,25 @@ namespace quantum_lines.Program.Calculation
         private Matrix<Complex> GetSizedMatrix(int size, OperatorModel model)
         {
             return ((SizeDependentOperatorModel) model).GetMatrix(size);
+        }
+
+        private Matrix<Complex> GetIdentityPartControllerMatrix(int index)
+        {
+            if(_operators[index] is ControllerOperatorModelBase controllerModel)
+            {
+                return controllerModel.GetIdentityPostselect();
+            }
+
+            throw new ArgumentException();
+        }
+        private Matrix<Complex> GetActionPartControllerMatrix(int index)
+        {
+            if(_operators[index] is ControllerOperatorModelBase controllerModel)
+            {
+                return controllerModel.GetActionPostselect();
+            }
+
+            throw new ArgumentException();
         }
     }
 }
